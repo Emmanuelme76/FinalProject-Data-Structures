@@ -1,0 +1,183 @@
+#include "ingredientinterface.hpp"
+
+using namespace std;
+
+void IngredientInterface::mainMenu() {
+    int opc;
+
+    cout << "Menu de Ingredientes" << endl;
+    cout << "1. Agregar ingrediente" << endl;
+    cout << "2. Eliminar ingrediente" << endl;
+    cout << "3. Editar ingrediente" << endl;
+    cout << "4. Mostrar lista de ingredientes" << endl;
+    cout << "5. Eliminar todos los ingredientes" << endl;
+    cout << "6. Salir" << endl;
+    cout << "Seleccione una opción: ";
+    cin >> opc;
+    cin.ignore();
+
+    switch (opc) {
+        case 1:
+            this->addIngredient();
+            break;
+        case 2:
+            this->delIngredient();
+            break;
+        case 3:
+            this->editIngredient();
+            break;
+        case 4:
+            this->showList();
+            break;
+        case 6:
+            cout << "Saliendo del menú de ingredientes..." << endl;
+            this->enterToContinue();
+            break;
+        default:
+            cout << "Opción inválida. Por favor, seleccione una opción válida." << endl;
+    }
+}
+
+void IngredientInterface::addIngredient() {
+    string name, amount;
+    Ingredient myIngredient;
+    char op;
+
+    do{
+        cout << "Ingrese el nombre del ingrediente: ";
+        getline(cin, name);
+        myIngredient.setName(name);
+
+        cout << "Ingrese la cantidad del ingrediente: ";
+        getline(cin, amount);
+        myIngredient.setAmount(amount);
+
+        this->myListRef->insertSortedData(myIngredient);
+
+        cout << "¿Desea agregar otro ingrediente? (s/n): ";
+        cin >> op;
+        op = toupper(op);
+        cin.ignore();
+
+        if(op != 'S' && op != 'N'){
+            cout << "Opción inválida." << endl; 
+            this->enterToContinue();
+        }
+
+    }  while(op != 'N' && op != 'S');
+}
+
+void IngredientInterface::delIngredient() {
+    string name;
+    Ingredient myIngredient;
+    char op;
+
+    do{
+        cout << "Ingrese el nombre del ingrediente a eliminar: ";
+        getline(cin, name);
+        myIngredient.setName(name);
+
+        List<Ingredient>::Position pos = this->myListRef->findData(myIngredient);
+        if(pos != nullptr){
+            this->myListRef->delData(pos);
+            cout << "Ingrediente eliminado." << endl;
+            this->enterToContinue();
+        } else {
+            cout << "Ingrediente no encontrado." << endl;
+            this->enterToContinue();
+        }
+
+        cout << "¿Desea eliminar otro ingrediente? (s/n): ";
+        cin >> op;
+        op = toupper(op);
+        cin.ignore();
+
+        if(op != 'S' && op != 'N'){
+            cout << "Opción inválida." << endl;
+            this->enterToContinue(); 
+        }
+
+    }  while(op != 'N' && op != 'S');
+}
+
+void IngredientInterface::delAllIngredients() {
+    char op;
+    
+    cout << "¿Estas seguro de que desea eliminar todos los ingredientes?, esta acción no se puede deshacer. (s/n): ";
+    cin >> op;
+    op = toupper(op);
+    cin.ignore();
+
+    if(op == 'S'){
+        this->myListRef->delAll();
+        cout << "Todos los ingredientes han sido eliminados." << endl;
+        this->enterToContinue();
+    } else {
+        cout << "Operación cancelada." << endl;
+        this->enterToContinue();
+    }
+
+}
+
+void IngredientInterface::editIngredient() {
+    string name;
+    Ingredient myIngredient, searchIngredient;
+
+    cout << "Ingrese el nombre del ingrediente a editar: ";
+    getline(cin, name);
+    myIngredient.setName(name);
+    List<Ingredient>::Position pos = this->myListRef->findData(myIngredient);
+    if (pos != nullptr) {
+        Ingredient& searchIngredient = this->myListRef->retrieve(pos);
+        cout << "Ingrediente actual: " << searchIngredient.getName() << " - " << searchIngredient.getAmount() << endl;
+        int opc;
+        cout << "¿Qué deseas editar?" << endl;
+        cout << "1. Nombre" << endl;
+        cout << "2. Cantidad" << endl;
+        cout << "Seleccione una opción: ";
+        cin >> opc;
+        cin.ignore();
+        switch (opc) {
+            case 1: {
+                string nuevoNombre;
+                cout << "Ingrese el nuevo nombre: ";
+                getline(cin, nuevoNombre);
+                searchIngredient.setName(nuevoNombre);
+                break;
+            }
+            case 2: {
+                string nuevaCantidad;
+                cout << "Ingrese la nueva cantidad: ";
+                getline(cin, nuevaCantidad);
+                searchIngredient.setAmount(nuevaCantidad);
+                break;
+            }
+            default:
+                cout << "Opción inválida." << endl;
+                this->enterToContinue();
+        }
+        cout << "Ingrediente editado." << endl;
+        this->enterToContinue();
+    } else {
+        cout << "Ingrediente no encontrado." << endl;
+        this->enterToContinue();
+    }
+}
+
+void IngredientInterface::showList() {
+    if (this->myListRef->isEmpty()) {
+        cout << "La lista de ingredientes está vacía." << endl;
+    } else {
+        cout << "Lista de ingredientes:" << endl;
+        cout << "Ingrediente - Cantidad" << endl;
+        cout << this->myListRef->toString();
+    }
+    this->enterToContinue();
+}
+
+void IngredientInterface::enterToContinue() {
+    cout << "Presione [ENTER] para continuar..." << endl;
+    cin.get();
+}
+
+IngredientInterface::IngredientInterface(List<Ingredient>& l) : myListRef(&l) {}
