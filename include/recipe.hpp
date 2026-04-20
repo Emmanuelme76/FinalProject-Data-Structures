@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "ingredient.hpp"
+#include "ingredientinterface.hpp"
 #include "name.hpp"
 #include "time.hpp"
 #include "list.hpp"
@@ -26,6 +27,7 @@ public:
 
     std::string getName()const;
     List<Ingredient>& getListIngredient();
+    const List<Ingredient>& getListIngredient() const;
     Time getPreparationTime()const;
     std::string getInstructions()const;
     Name getAuthor()const;

@@ -1,0 +1,390 @@
+Huevos Rancheros
+00:20
+Freir tortillas, preparar salsa, freir huevos, montar.
+Garcia
+Maria
+1
+1
+Huevos
+2 piezas
+s
+Tortillas de maiz
+2 piezas
+s
+Jitomate
+2 piezas
+s
+Cebolla
+1/4 pieza
+s
+Chile serrano
+1 pieza
+s
+Ajo
+1 diente
+s
+Aceite
+2 cucharadas
+s
+Sal
+al gusto
+s
+Frijoles refritos
+1/2 taza
+s
+Cilantro
+unas hojitas
+n
+
+s
+Enchiladas Verdes
+00:45
+Hervir tomates y chiles, licuar, freir tortillas, rellenar con pollo, bañar en salsa.
+Martinez
+Jose
+2
+1
+Pollo deshebrado
+500 gramos
+s
+Tortillas de maiz
+12 piezas
+s
+Tomate verde
+500 gramos
+s
+Chile serrano
+3 piezas
+s
+Cebolla
+1/2 pieza
+s
+Ajo
+2 dientes
+s
+Crema
+1/4 litro
+s
+Queso fresco
+200 gramos
+s
+Aceite
+1/4 taza
+s
+Sal
+al gusto
+n
+
+s
+Sincronizadas
+00:10
+Calentar tortillas, colocar jamon y queso, doblar y calentar hasta derretir el queso.
+Lopez
+Ana
+3
+1
+Tortillas de harina
+4 piezas
+s
+Jamon
+4 rebanadas
+s
+Queso manchego
+200 gramos
+s
+Mantequilla
+1 cucharada
+s
+Pico de gallo
+al gusto
+s
+Aguacate
+1 pieza
+s
+Crema
+2 cucharadas
+s
+Salsa picante
+al gusto
+s
+Frijoles
+2 cucharadas
+s
+Lechuga
+unas hojas
+n
+
+s
+Pavo al Horno
+04:00
+Lavar el pavo, inyectar vino, rellenar, hornear a 180 grados por 3 horas.
+Fernandez
+Carlos
+4
+1
+Pavo entero
+1 pieza (5 kg)
+s
+Vino blanco
+1 taza
+s
+Mantequilla
+1 barra
+s
+Carne molida
+500 gramos
+s
+Nuez
+100 gramos
+s
+Almendras
+100 gramos
+s
+Pasas
+50 gramos
+s
+Cebolla
+1 pieza
+s
+Ajo
+4 dientes
+s
+Sal y pimienta
+al gusto
+n
+
+s
+Chilaquiles Rojos
+00:30
+Freir totopos, bañar en salsa roja hirviendo, servir con guarniciones.
+Gomez
+Sofia
+1
+1
+Totopos de maiz
+300 gramos
+s
+Jitomate
+4 piezas
+s
+Chile guajillo
+2 piezas
+s
+Cebolla
+1/2 pieza
+s
+Ajo
+1 diente
+s
+Crema
+1/2 taza
+s
+Queso panela
+150 gramos
+s
+Pollo deshebrado
+1 taza
+s
+Epazote
+1 ramita
+s
+Sal
+al gusto
+n
+
+s
+Bistec a la Mexicana
+00:40
+Picar carne y verduras, freir carne, agregar cebolla, chile y tomate, cocer a fuego lento.
+Perez
+Luis
+2
+1
+Bistec de res
+500 gramos
+s
+Jitomate
+3 piezas
+s
+Cebolla
+1 pieza
+s
+Chile serrano
+2 piezas
+s
+Aceite
+2 cucharadas
+s
+Ajo
+1 diente
+s
+Sal
+1 pizca
+s
+Pimienta
+1 pizca
+s
+Cilantro
+unas ramas
+s
+Agua
+1/4 taza
+n
+
+s
+Tacos de Soya
+00:25
+Hidratar soya, exprimir, guisar con especias y servir en tortillas.
+Ramirez
+Elena
+3
+1
+Soya texturizada
+2 tazas
+s
+Agua
+1 litro
+s
+Salsa de soya
+3 cucharadas
+s
+Cebolla
+1/2 pieza
+s
+Ajo en polvo
+1 cucharadita
+s
+Pimenton
+1 cucharadita
+s
+Tortillas de maiz
+10 piezas
+s
+Limon
+2 piezas
+s
+Cilantro
+al gusto
+s
+Salsa taquera
+al gusto
+n
+
+s
+Bacalao a la Vizcaina
+02:30
+Desalar bacalao, freir ajo y cebolla, agregar pure de tomate, aceitunas y cocinar.
+Torres
+Miguel
+4
+1
+Bacalao seco
+1 kilo
+s
+Jitomate
+1.5 kilos
+s
+Cebolla
+2 piezas
+s
+Ajo
+1 cabeza
+s
+Aceite de oliva
+1 taza
+s
+Aceitunas
+200 gramos
+s
+Alcaparras
+100 gramos
+s
+Chiles güeros
+1 lata
+s
+Papas cambray
+500 gramos
+s
+Almendras fileteadas
+100 gramos
+n
+
+s
+Hot Cakes
+00:15
+Mezclar harina, leche, huevo y mantequilla. Cocinar porciones en sarten caliente.
+Diaz
+Laura
+1
+1
+Harina para hot cakes
+1 taza
+s
+Leche
+3/4 taza
+s
+Huevo
+1 pieza
+s
+Mantequilla derretida
+1 cucharada
+s
+Mantequilla para sarten
+1 trocito
+s
+Miel de maple
+al gusto
+s
+Mermelada
+2 cucharadas
+s
+Fresas
+5 piezas
+s
+Platano
+1 pieza
+s
+Leche condensada
+1 cucharada
+n
+
+s
+Pozole Rojo
+03:00
+Cocer maiz con carne, licuar chiles y agregar al caldo, servir con guarniciones.
+Vargas
+Diego
+2
+1
+Maiz pozolero
+1 kilo
+s
+Carne de cerdo (maciza)
+1 kilo
+s
+Chile ancho
+3 piezas
+s
+Chile guajillo
+5 piezas
+s
+Ajo
+1 cabeza
+s
+Cebolla
+1 pieza
+s
+Lechuga picada
+1/2 pieza
+s
+Rabanos
+1 manojo
+s
+Oregano
+2 cucharadas
+s
+Limon
+5 piezas
+n
+
+n

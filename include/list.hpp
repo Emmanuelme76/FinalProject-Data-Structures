@@ -61,6 +61,8 @@ template <class T, int ARRAYSIZE = 1024>  // De esta manera se puede dejar un
 
   void instData(const int&, const T&);  // pos, dato
 
+  void insertSortedData(const T&);
+
   void delData(const int&);  // pos
 
   int getFirstPos() const;
@@ -88,6 +90,8 @@ template <class T, int ARRAYSIZE = 1024>  // De esta manera se puede dejar un
   T& retreive(const int&);
 
   std::string toString() const;
+
+  std::string toStringWithIngredients() const;
 
   void delAll();
 
@@ -196,6 +200,32 @@ void List<T, ARRAYSIZE>::instData(const int& p, const T& e) {
 
   this->last++;
 }
+
+template <class T, int ARRAYSIZE>
+void List<T, ARRAYSIZE>::insertSortedData(const T& e) {
+  if (this->isFull()) {
+    throw Exception("Desbordamiento de datos, insertSortedData");
+  }
+
+  if(this->isEmpty()) {
+    this->data[0] = e;
+    this->last ++;
+
+    return;
+  }
+
+  int i(this->getLastPos());
+  
+  while(i != -1 && data[i] > e) {
+  this->data[i + 1] = this->data[i];
+    i--;
+  }
+
+  this->data[i + 1] = e;
+
+  this->last ++;
+}
+
 
 template <class T, int ARRAYSIZE>
 void List<T, ARRAYSIZE>::delData(const int& p) {
@@ -487,6 +517,7 @@ string List<T, ARRAYSIZE>::toString() const {
 
   return result;
 }
+
 
 template <class T, int ARRAYSIZE>
 void List<T, ARRAYSIZE>::delAll() {

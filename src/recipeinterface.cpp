@@ -9,8 +9,8 @@ void RecipeInterface::menu() {
     cout << "║																      														║" << endl;
     cout << "║		██████╗ ███████╗ ██████╗███████╗ ████████╗ █████╗   ██████╗██╗  ██████╗ 			     							║" << endl;
     cout << "║		██╔══██╗██╔════╝██╔════╝██╔════╝╚══ ██╔══╝██╔══██ ╗██╔══██╗██║ ██╔══██╗			     								║" << endl;
-    cout << "║		██████╔╝█████╗  ██║       █████╗    ██║   ███████ ║██████╔╝██║ ██║   ██║                          				    ║" << endl;
-    cout << "║		██╔══██╗██╔══╝  ██║       ██╔══╝    ██║   ██╔══██ ║██╔══██╗██║ ██║   ██║		      	     					    ║" << endl;
+    cout << "║		██████╔╝█████╗  ██║     █████╗      ██║   ███████ ║██████╔╝██║ ██║   ██║                          				    ║" << endl;
+    cout << "║		██╔══██╗██╔══╝  ██║     ██╔══╝      ██║   ██╔══██ ║██╔══██╗██║ ██║   ██║		      	     					    ║" << endl;
     cout << "║		██║  ██║███████╗╚██████╗███████╗    ██║   ██║  ██ ║██║  ██ ██║ ╚██████╔╝			     							║" << endl;
     cout << "║		╚═╝  ╚═╝╚══════╝ ╚═════╝╚══════╝    ╚═╝    ╚═╝  ╚═╝╚═╝   ╚═╝ ╚═╝╚═════╝ 			     							║" << endl;
     cout << "║                                                                     								     					║" << endl;
@@ -92,70 +92,71 @@ void RecipeInterface::addRecipe() {
     int categoryOpc;
     char op;
     
-
     do{
-    cout << "Agregar receta" << endl;
-    cout << "Ingrese el nombre de la receta: ";
-    getline(cin, myStr);
-    myRecipe.setName(myStr);
+        cout << "Agregar receta" << endl;
+        cout << "Ingrese el nombre de la receta: ";
+        getline(cin, myStr);
+        myRecipe.setName(myStr);
 
-    cout << "Ingrese el tiempo de preparacion (HH:MM): ";
-    getline(cin, myStr, ':');
+        cout << "Ingrese el tiempo de preparacion (HH:MM): ";
+        getline(cin, myStr, ':');
 
-    myTime.setHours(stoi(myStr));
+        myTime.setHours(stoi(myStr));
 
-    getline(cin, myStr);
-    myTime.setMinutes(stoi(myStr));
+        getline(cin, myStr);
+        myTime.setMinutes(stoi(myStr));
 
-    myRecipe.setPreparationTime(myTime);
+        myRecipe.setPreparationTime(myTime);
 
-    cout << "Ingrese el procedimiento de la receta: ";
-    getline(cin, myStr);
-    myRecipe.setInstructions(myStr);
+        cout << "Ingrese el procedimiento de la receta: ";
+        getline(cin, myStr);
+        myRecipe.setInstructions(myStr);
 
-    cout << "Ingrese el autor de la receta: ";
-    cout << "Apellido: ";
-    getline(cin, myStr);
-    myName.setLast(myStr);
+        cout << "Ingrese el autor de la receta: " << endl;
+        cout << "Apellido: ";
+        getline(cin, myStr);
+        myName.setLast(myStr);
 
-    cout << "Nombre: ";
-    getline(cin, myStr);
-    myName.setFirst(myStr);
+        cout << "Nombre: ";
+        getline(cin, myStr);
+        myName.setFirst(myStr);
 
-    myRecipe.setAuthor(myName);
+        myRecipe.setAuthor(myName);
 
-    do{
-    cout << "Categoría de la receta " << endl;
-    cout << "1. Desayuno" << endl;
-    cout << "2. Comida" << endl;
-    cout << "3. Cena" << endl;
-    cout << "4. Navidad" << endl;
-    cout << "Seleccione una opción: ";
-    cin >> categoryOpc;
-    cin.ignore();
+        do{
+            cout << "Categoría de la receta " << endl;
+            cout << "1. Desayuno" << endl;
+            cout << "2. Comida" << endl;
+            cout << "3. Cena" << endl;
+            cout << "4. Navidad" << endl;
+            cout << "Seleccione una opción: ";
+            cin >> categoryOpc;
+            cin.ignore();
 
-    switch (categoryOpc) {
-        case 1:
-            myRecipe.setCategory("Desayuno");
-            break;
-        case 2:
-            myRecipe.setCategory("Comida");
-            break;
-        case 3:
-            myRecipe.setCategory("Cena");
-            break;
-        case 4:
-            myRecipe.setCategory("Navidad");
-            break;
+            switch (categoryOpc) {
+                case 1:
+                    myRecipe.setCategory("Desayuno");
+                    break;
+                case 2:
+                    myRecipe.setCategory("Comida");
+                    break;
+                case 3:
+                    myRecipe.setCategory("Cena");
+                    break;
+                case 4:
+                    myRecipe.setCategory("Navidad");
+                    break;
 
-        default:
-            cout << "Opción inválida. Por favor, seleccione una opción válida." << endl;
-            break;
-    
-    }
-    } while(categoryOpc < 1 || categoryOpc > 4);
+                default:
+                    cout << "Opción inválida. Por favor, seleccione una opción válida." << endl;
+                    break;
+            
+            }
 
-    new IngredientInterface(myRecipe.getListIngredient());
+        } while(categoryOpc < 1 || categoryOpc > 4);
+
+    IngredientInterface ingredientInterface(myRecipe.getListIngredient());
+    ingredientInterface.mainMenu();
 
     this->myListRef->instData(this->myListRef->getLastPos(), myRecipe);
 
@@ -167,13 +168,15 @@ void RecipeInterface::addRecipe() {
         op = toupper(op);
         cin.ignore();
 
+        do{
         if(op != 'S' && op != 'N'){
             cout << "Opción inválida." << endl; 
             this->enterToContinue();
         }
+        } while (op != 'S' && op != 'N');
 
 
-    } while(op != 'N' && op != 'S');
+    } while(op == 'S');
 
 }
 
@@ -277,9 +280,11 @@ void RecipeInterface::editRecipe() {
             getline(cin, myStr);
             recipeToEdit.setCategory(myStr);
             break;
-        case 6:
-            new IngredientInterface(recipeToEdit.getListIngredient());
+        case 6: {
+            IngredientInterface ingredientInterface(recipeToEdit.getListIngredient());
+            ingredientInterface.mainMenu();
             break;
+        }
         
         default:
             cout << "Opción inválida." << endl;
@@ -299,32 +304,67 @@ void RecipeInterface::editRecipe() {
 
 void RecipeInterface::showList() {
     char op;
+    int pos(this->myListRef->getFirstPos());
 
     if (this->myListRef->isEmpty()) {
         cout << "La lista de recetas está vacía." << endl;
-    } else {
+    } 
+    else {
         cout <<"Con ingredientes o sin ingredientes? (s/n): ";
         cin >> op;
         cin.ignore();
         op = toupper(op);
         if(op == 'S'){
             cout << "Lista de recetas con ingredientes:" << endl;
-            this->myListRef->toStringWithIngredients();
+            while(pos != -1){
+                cout << this->myListRef->retreive(pos).toString(true);
+
+                pos = this->myListRef->getNextPos(pos);
+            }
+
         }
+            else {
+                cout << "Lista de recetas sin ingredientes:" << endl;
+                cout << this->myListRef->toString();
+            }
         
-        cout << "Lista de recetas:" << endl;
-        cout << this->myListRef->toString();
     }
 }
 
 void RecipeInterface::sortData() {
+    int opc;
+    do{
+        cout << "Como quieres oredenar las recetas?";
+        cout << "1. Por Nombre";
+        cout << "2. Por tiempo de preparacion";
+        switch (opc) {
+        case 1:
+            this->myListRef->sortDataQuick(Recipe::compareByName);
+            break;
+        case 2:
+            this->myListRef->sortDataQuick(Recipe::compareByPreparationTime);
+            break;
+        
+        default:
+            cout << "Opcion Invalida" << endl;
+            break;
+        }
+    } while(opc < 1 || opc < 2);
 }
 
-void RecipeInterface::writeToDisk() {}
+void RecipeInterface::writeToDisk() {
+    cout << "opc en mantenimiento" << endl;
+}
 
-void RecipeInterface::readFromDisk() {}
+void RecipeInterface::readFromDisk() {
+    cout << "opc en mantenimiento" << endl;
+}
 
-void RecipeInterface::enterToContinue() {}
+void RecipeInterface::enterToContinue() {
+    cout << "Presione [ENTER] para continuar...";
+    cin.get();
+    cout << endl << endl;
+}
 
 
 RecipeInterface::RecipeInterface(List<Recipe>& l) : myListRef(&l) {

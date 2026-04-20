@@ -26,6 +26,8 @@ string Ingredient::toString() const {
     result += myStr + " | ";
 
     result += this->amount;
+
+    return result;
 }
 
 void Ingredient::setName(const string& n) {

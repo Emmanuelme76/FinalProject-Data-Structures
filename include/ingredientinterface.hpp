@@ -5,13 +5,14 @@
 #include <fstream>
 #include <iostream>
 
-#include "listofingredients.hpp"
+#include "list.hpp"
 #include "ingredient.hpp"
 
 class IngredientInterface{
 private:
     List<Ingredient>* myListRef;
 
+public:
     void mainMenu();
 
     void addIngredient();

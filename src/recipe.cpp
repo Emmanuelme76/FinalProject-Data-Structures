@@ -5,7 +5,7 @@ using namespace std;
 Recipe::Recipe() {}
 
 Recipe::Recipe(const Recipe& r) : name(r.name), ingredientList(r.ingredientList), preparationTime(r.preparationTime), 
-                                  instructions(r.instructions), author(r.author)  {}
+                                  instructions(r.instructions), author(r.author), category(r.category)  {}
 
 Recipe::~Recipe() {}
 
@@ -14,6 +14,10 @@ string Recipe::getName() const {
 }
 
 List<Ingredient>& Recipe::getListIngredient() {
+    return this->ingredientList;
+}
+
+const List<Ingredient>& Recipe::getListIngredient() const {
     return this->ingredientList;
 }
 
