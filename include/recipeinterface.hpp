@@ -28,6 +28,8 @@ private:
     
     void showList();
 
+    void searchRecipe();
+
     void sortData();
     
     void writeToDisk();

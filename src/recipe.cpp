@@ -49,7 +49,7 @@ string Recipe::toString(const bool& showIngredients) const {
     if(showIngredients){
         result += "\n";
 
-        this->ingredientList.toString();
+        result += this->ingredientList.toString();
 
         result += "\n\n";
     }
@@ -91,6 +91,7 @@ Recipe& Recipe::operator=(const Recipe& r) {
     this->preparationTime = r.preparationTime;
     this->instructions = r.instructions;
     this->author = r.author;
+    this->category = r.category;
     
     return *this;
 }

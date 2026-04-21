@@ -85,7 +85,6 @@ void RecipeInterface::mainMenu() {
 }
 
 void RecipeInterface::addRecipe() {
-    Recipe myRecipe;
     string myStr;
     Time myTime;
     Name myName;
@@ -93,6 +92,7 @@ void RecipeInterface::addRecipe() {
     char op;
     
     do{
+        Recipe myRecipe;
         cout << "Agregar receta" << endl;
         cout << "Ingrese el nombre de la receta: ";
         getline(cin, myStr);
@@ -220,15 +220,16 @@ void RecipeInterface::delAllRecipes(){
 
 void RecipeInterface::editRecipe() {
     string myStr;
-    Recipe myRecipe, searchRecipe;
+    Recipe searchRecipe;
     int pos, editOpc;
+    char op;
     Time myTime;
     Name myName;
 
     cout << "Nombre de la receta a editar: ";
     getline(cin, myStr);
-    myRecipe.setName(myStr);
-    pos = this->myListRef->findData(myRecipe);
+    searchRecipe.setName(myStr);
+    pos = this->myListRef->findDataL(searchRecipe);
     if (pos != -1) {
         Recipe& recipeToEdit = this->myListRef->retreive(pos);
 
@@ -291,6 +292,25 @@ void RecipeInterface::editRecipe() {
             break;
         }
 
+        if (!(editOpc < 1 || editOpc > 6)) {
+
+            cout << "¿Estas seguro de que desea eliminar todas las recetas?, esta acción no se puede deshacer. (s/n): ";
+            cin >> op;
+            op = toupper(op);
+            cin.ignore();
+
+            if(op == 'S'){
+                this->myListRef->delAll();
+                cout << "Todas las recetas han sido eliminadas." << endl;
+                this->enterToContinue();
+            } 
+            else {
+                cout << "Operación cancelada." << endl;
+                this->enterToContinue();
+            }
+
+            }
+
         } while(editOpc < 1 || editOpc > 6);
 
 
@@ -329,6 +349,11 @@ void RecipeInterface::showList() {
             }
         
     }
+}
+
+void RecipeInterface::searchRecipe()
+{
+    
 }
 
 void RecipeInterface::sortData() {

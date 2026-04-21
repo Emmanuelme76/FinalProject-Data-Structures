@@ -5,37 +5,41 @@ using namespace std;
 void IngredientInterface::mainMenu() {
     int opc;
 
-    cout << "Menu de Ingredientes" << endl;
-    cout << "1. Agregar ingrediente" << endl;
-    cout << "2. Eliminar ingrediente" << endl;
-    cout << "3. Editar ingrediente" << endl;
-    cout << "4. Mostrar lista de ingredientes" << endl;
-    cout << "5. Eliminar todos los ingredientes" << endl;
-    cout << "6. Salir" << endl;
-    cout << "Seleccione una opción: ";
-    cin >> opc;
-    cin.ignore();
+    do {
+        do{
+            cout << "Menu de Ingredientes" << endl;
+            cout << "1. Agregar ingrediente" << endl;
+            cout << "2. Eliminar ingrediente" << endl;
+            cout << "3. Editar ingrediente" << endl;
+            cout << "4. Mostrar lista de ingredientes" << endl;
+            cout << "5. Eliminar todos los ingredientes" << endl;
+            cout << "6. Salir" << endl;
+            cout << "Seleccione una opción: ";
+            cin >> opc;
+            cin.ignore();
 
-    switch (opc) {
-        case 1:
-            this->addIngredient();
-            break;
-        case 2:
-            this->delIngredient();
-            break;
-        case 3:
-            this->editIngredient();
-            break;
-        case 4:
-            this->showList();
-            break;
-        case 6:
-            cout << "Saliendo del menú de ingredientes..." << endl;
-            this->enterToContinue();
-            break;
-        default:
-            cout << "Opción inválida. Por favor, seleccione una opción válida." << endl;
-    }
+            switch (opc) {
+                case 1:
+                    this->addIngredient();
+                    break;
+                case 2:
+                    this->delIngredient();
+                    break;
+                case 3:
+                    this->editIngredient();
+                    break;
+                case 4:
+                    this->showList();
+                    break;
+                case 6:
+                    cout << "Saliendo del menú de ingredientes..." << endl;
+                    this->enterToContinue();
+                    break;
+                default:
+                    cout << "Opción inválida. Por favor, seleccione una opción válida." << endl;
+            } 
+        } while(opc < 1 && opc > 6);
+    } while (opc != 6 && opc != 1);
 }
 
 void IngredientInterface::addIngredient() {
@@ -79,7 +83,7 @@ void IngredientInterface::delIngredient() {
         getline(cin, name);
         myIngredient.setName(name);
 
-        pos = this->myListRef->findDataL(myIngredient);
+        pos = this->myListRef->findDataL(myIngredient, Ingredient::compareByName);
         if(pos != -1){
             this->myListRef->delData(pos);
             cout << "Ingrediente eliminado." << endl;
@@ -94,12 +98,14 @@ void IngredientInterface::delIngredient() {
         op = toupper(op);
         cin.ignore();
 
-        if(op != 'S' && op != 'N'){
-            cout << "Opción inválida." << endl;
-            this->enterToContinue(); 
-        }
+        do{
+            if(op != 'S' && op != 'N'){
+                cout << "Opción inválida." << endl;
+                this->enterToContinue(); 
+            }
+        } while(op != 'S' && op != 'N');
 
-    }  while(op != 'N' && op != 'S');
+    }  while(op == 'S');
 }
 
 void IngredientInterface::delAllIngredients() {
@@ -130,7 +136,7 @@ void IngredientInterface::editIngredient() {
     cout << "Ingrese el nombre del ingrediente a editar: ";
     getline(cin, name);
     searchIngredient.setName(name);
-    pos = this->myListRef->findDataL(searchIngredient);
+    pos = this->myListRef->findDataL(searchIngredient, Ingredient::compareByName);
     if (pos != -1) {
         myIngredient = this->myListRef->retreive(pos);
 
