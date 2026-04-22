@@ -36,12 +36,13 @@ void RecipeInterface::mainMenu() {
         cout << "1. Agregar receta" << endl;
         cout << "2. Eliminar receta" << endl;
         cout << "3. Editar receta" << endl;
-        cout << "4. Mostrar lista de recetas" << endl;
-        cout << "5. Ordenar recetas" << endl;
-        cout << "6. Guardar recetas en disco" << endl;
-        cout << "7. Cargar recetas desde disco" << endl;
-        cout << "8. Eliminar todas las recetas" << endl;
-        cout << "9. Salir" << endl;
+        cout << "4. Buscar una receta" << endl;
+        cout << "5. Mostrar lista de recetas" << endl;
+        cout << "6. Ordenar recetas" << endl;
+        cout << "7. Guardar recetas en disco" << endl;
+        cout << "8. Cargar recetas desde disco" << endl;
+        cout << "9. Eliminar todas las recetas" << endl;
+        cout << "10. Salir" << endl;
         cout << "Seleccione una opción: ";
         cin >> opc;
         cin.ignore();
@@ -57,21 +58,24 @@ void RecipeInterface::mainMenu() {
                 this->editRecipe();
                 break;
             case 4:
-                this->showList();
+                this->searchRecipe();
                 break;
             case 5:
-                this->sortData();
+                this->showList();
                 break;
             case 6:
-                this->writeToDisk();
+                this->sortData();
                 break;
             case 7:
-                this->readFromDisk();
+                this->writeToDisk();
                 break;
             case 8:
-                this->delAllRecipes();
+                this->readFromDisk();
                 break;
             case 9:
+                this->delAllRecipes();
+                break;
+            case 10:
                 cout << "Saliendo del programa..." << endl;
                 this->enterToContinue();
                 break;
@@ -79,7 +83,7 @@ void RecipeInterface::mainMenu() {
                 cout << "Opción inválida. Por favor, seleccione una opción válida." << endl;
         }
 
-    } while(opc != 8);
+    } while(opc != 10);
     
     
 }
@@ -221,7 +225,7 @@ void RecipeInterface::delAllRecipes(){
 void RecipeInterface::editRecipe() {
     string myStr;
     Recipe searchRecipe;
-    int pos, editOpc;
+    int pos, editOpc, categoryOpc;
     char op;
     Time myTime;
     Name myName;
@@ -271,43 +275,75 @@ void RecipeInterface::editRecipe() {
             cout << "Ingrese el nuevo autor: " << endl;
             cout << "Apellido: ";
             getline(cin, myStr);
-            recipeToEdit.getAuthor().setLast(myStr);
+            myName.setLast(myStr);
             cout << "Nombre: ";
             getline(cin, myStr);
-            recipeToEdit.getAuthor().setFirst(myStr);
+            myName.setFirst(myStr);
+
+            recipeToEdit.setAuthor(myName);
             break;
         case 5:
-            cout << "Ingrese la nueva categoría: ";
-            getline(cin, myStr);
-            recipeToEdit.setCategory(myStr);
-            break;
-        case 6: {
+            do{
+                cout << "Ingrese la nueva categoría: " <<endl << endl;
+                cout << "Categoría de la receta " << endl;
+                cout << "1. Desayuno" << endl;
+                cout << "2. Comida" << endl;
+                cout << "3. Cena" << endl;
+                cout << "4. Navidad" << endl;
+                cout << "Seleccione una opción: ";
+                cin >> categoryOpc;
+                cin.ignore();
+
+                    switch (categoryOpc) {
+                        case 1:
+                            recipeToEdit.setCategory("Desayuno");
+                            break;
+                        case 2:
+                            recipeToEdit.setCategory("Comida");
+                            break;
+                        case 3:
+                            recipeToEdit.setCategory("Cena");
+                            break;
+                        case 4:
+                            recipeToEdit.setCategory("Navidad");
+                            break;
+
+                        default:
+                            cout << "Opción inválida. Por favor, seleccione una opción válida." << endl;
+                            break;
+                        }
+
+                }  while(categoryOpc < 1 || categoryOpc > 4); 
+            break; 
+        case 6: {   
             IngredientInterface ingredientInterface(recipeToEdit.getListIngredient());
             ingredientInterface.mainMenu();
             break;
-        }
-        
+            }
         default:
             cout << "Opción inválida." << endl;
             break;
+
         }
 
         if (!(editOpc < 1 || editOpc > 6)) {
 
-            cout << "¿Estas seguro de que desea eliminar todas las recetas?, esta acción no se puede deshacer. (s/n): ";
+            
+            cout << "Deseas editar otro elemento de la Receta?. (s/n): ";
             cin >> op;
             op = toupper(op);
             cin.ignore();
+            
+            do{
+               if(op != 'S' && op != 'N'){
+               cout << "Opción inválida." << endl; 
+               this->enterToContinue();
+               }
+           } while (op != 'S' && op != 'N');
 
             if(op == 'S'){
-                this->myListRef->delAll();
-                cout << "Todas las recetas han sido eliminadas." << endl;
-                this->enterToContinue();
+                editOpc = 0;
             } 
-            else {
-                cout << "Operación cancelada." << endl;
-                this->enterToContinue();
-            }
 
             }
 

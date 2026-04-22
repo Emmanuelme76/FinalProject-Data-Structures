@@ -144,6 +144,10 @@ int Recipe::compareByAuthor(const Recipe& a, const Recipe& b) {
     return Name::compare(a.author, b.author);
 }
 
+int Recipe::compareByCategory(const Recipe& a, const Recipe& b) {
+    return a.category.compare(b.category); 
+}
+
 string Recipe::serialize() const {}
 
 void Recipe::deserialize(const string&) {}

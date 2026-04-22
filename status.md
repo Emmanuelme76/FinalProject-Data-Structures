@@ -1,10 +1,9 @@
 # Pendientes
 
+## Menu Principal
+-[x] La opcion de salir no funciona bien
+
 ## toString
-- [x] El toString de recipeInterface no filtra por lista de recetas
-- [x] Los ingredientes se comportan extraño en las ultimas recetas
-- [x] Se debe mejorar el menu de ingredientes colocando otra condicion al do-while 
-- [x] **ERROR CRITICO** al intentar insertar los ingredientes, el bucle que coloque tiene una logica incorrecta
 
 ## Solucionar Categoria
 - [x] Debo de solucionar porque las categorias no aparecen, quizas sea un problema del constructor o del **operador de asignacion!!** (si era)
@@ -19,11 +18,11 @@
 Creo que el menu de editar no edita nada
 - [x] Los nombres no se editan (_Se arreglo con un_ ***&***)
 
-- [ ] El autor no se edita
+- [x] El autor no se edita (La sintaxis estaba medio rara)
 
-- [ ] El menu de categorias no es de seleccion
+- [x] El menu de categorias no es de seleccion
 
-- [ ] Arreglar todo el menu
+- [x] Arreglar todo el menu
 
 Posibles hipotesis del mal funcionamiento:
 - La interfaz de editar receta está rota
@@ -34,7 +33,12 @@ Posibles hipotesis del mal funcionamiento:
 - Para la Busqueda de ingredientes se usó una funcion explicita porque al parecer rcurria al operador `==` y se tenia implementado que regresara nombre y cantidad en ese operador
 
 ### Ingredientes
-- [] El Menu de ingredientes en la parte de eliminar no funciona la caracteristica principal
+- [x] El Menu de ingredientes en la parte de eliminar no funciona la caracteristica principal
+ 
+- [x] Editar Ingredientes no edita la lista original
+    - [x] El problema ahora es volver a ordenar el ingrediente si se cambia su nombre, asi que debo de quitar la modificacion le nombre, reciclar insertSortedData o reescribirlo ahí mismo (El insertSortedData), (Al final la solución fue la segunda opcion, eliminarlo y volverlo a insertar, esto con ayuda de un auxiliar).
+
+- [x] Hay opciones que marca como invalidas pero son validas
 
 - [x] ~~La busqueda de ingredientes no funciona~~  
 
@@ -46,8 +50,15 @@ Mi hipotesis principal es que probablemente la problematica no esté en la inter
 
 ## Agregar Receta
 ### Ingredientes
-- [ ] Los ingredientes no se orden bien en algunas recetas
+- [x] Los ingredientes no se orden bien en algunas recetas
 
+
+## Historial
+### toSring
+- [x] El toString de recipeInterface no filtra por lista de recetas
+- [x] Los ingredientes se comportan extraño en las ultimas recetas
+- [x] Se debe mejorar el menu de ingredientes colocando otra condicion al do-while 
+- [x] **ERROR CRITICO** al intentar insertar los ingredientes, el bucle que coloque tiene una logica incorrecta
 
 
 

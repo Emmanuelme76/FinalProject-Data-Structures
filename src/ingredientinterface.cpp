@@ -28,6 +28,9 @@ void IngredientInterface::mainMenu() {
                 case 3:
                     this->editIngredient();
                     break;
+                case 5:
+                    this->delAllIngredients();
+                    break;
                 case 4:
                     this->showList();
                     break;
@@ -129,7 +132,7 @@ void IngredientInterface::delAllIngredients() {
 
 void IngredientInterface::editIngredient() {
     string name;
-    Ingredient myIngredient, searchIngredient;
+    Ingredient searchIngredient;
     int pos;
     int opc;
 
@@ -138,7 +141,7 @@ void IngredientInterface::editIngredient() {
     searchIngredient.setName(name);
     pos = this->myListRef->findDataL(searchIngredient, Ingredient::compareByName);
     if (pos != -1) {
-        myIngredient = this->myListRef->retreive(pos);
+        Ingredient& myIngredient = this->myListRef->retreive(pos);
 
         do{
             cout << "Ingrediente actual: " << myIngredient.getName() << " - " << myIngredient.getAmount() << endl;
@@ -171,6 +174,13 @@ void IngredientInterface::editIngredient() {
     } while(opc < 1 or opc > 2);
         cout << "Ingrediente editado." << endl;
         this->enterToContinue();
+
+        //Esto resuelve la problematica de que al editar el nombre
+        //del ingrediente La insercion ordenada no se vea afectada
+
+        Ingredient aux = myIngredient;
+        myListRef->delData(pos);
+        this->myListRef->insertSortedData(aux);
     } else {
         cout << "Ingrediente no encontrado." << endl;
         this->enterToContinue();

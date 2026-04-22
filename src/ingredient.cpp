@@ -46,7 +46,7 @@ Ingredient& Ingredient::operator=(const Ingredient& i) {
 }
 
 bool Ingredient::operator==(const Ingredient& i) const {
-    return (this->name == i.name and this->amount == i.amount);
+    return (this->name == i.name);
 }
 
 bool Ingredient::operator!=(const Ingredient& i) const {
@@ -54,7 +54,7 @@ bool Ingredient::operator!=(const Ingredient& i) const {
 }
 
 bool Ingredient::operator<(const Ingredient& i) const {
-    return (this->name < i.name and this->amount < i.amount);
+    return (this->name < i.name);
 }
 
 bool Ingredient::operator<=(const Ingredient& i) const {
