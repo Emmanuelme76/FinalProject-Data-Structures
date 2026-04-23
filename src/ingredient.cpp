@@ -88,14 +88,14 @@ void Ingredient::deserialize(const string&) {}
 istream& operator >> (istream& is, Ingredient& i) {
     string myStr;
 
-    getline(is, myStr, ';');
-    i.name = myStr;
-    getline(is, myStr, ';');
-    i.amount = myStr;
+    getline(is, i.name);
+    getline(is, i.amount);
+
+    return is;
 }
 
 ostream& operator << (ostream& os, const Ingredient& i) {
-    os << i.name << ';';
+    os << i.name << '\n';
     os << i.amount;
 
     return os;

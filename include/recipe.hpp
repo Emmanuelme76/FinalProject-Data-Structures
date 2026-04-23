@@ -3,6 +3,8 @@
 
 #include <string>
 #include <iostream>
+#include <limits>
+#include <sstream>
 
 #include "ingredient.hpp"
 #include "ingredientinterface.hpp"

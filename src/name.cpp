@@ -91,16 +91,14 @@ void Name::deserialize(const string& str) {
 istream& operator >> (istream& is, Name& n) {
     string myStr;
 
-    getline(is, myStr, ';');
-    n.last = myStr;
-    getline(is, myStr, ';');
-    n.first = myStr;
+    getline(is, n.last);
+    getline(is, n.first);
 
     return is;
 }
 
 ostream& operator<< (ostream& os, const Name& n) {
-    os << n.last << ';';
+    os << n.last << "\n";
     os << n.first;
 
     return os;

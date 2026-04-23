@@ -588,11 +588,43 @@ void RecipeInterface::sortData() {
 }
 
 void RecipeInterface::writeToDisk() {
-    cout << "opc en mantenimiento" << endl;
+    string myStr;
+
+    cout << "Nombre del archivo: ";
+    getline(cin, myStr);
+
+    ofstream myFile(myStr, ios_base::trunc);
+  if (myFile.is_open()) {
+    cout << "Escribiendo al archivo..." << endl;
+    myFile << *this->myListRef;
+    myFile.close();
+    cout << "Archivo Escrito exitosamente" << endl;
+
+    this->enterToContinue();
+  } else {
+    cout << "Error al abrir el Archivo" << endl;
+    this->enterToContinue();
+  }
+
 }
 
 void RecipeInterface::readFromDisk() {
-    cout << "opc en mantenimiento" << endl;
+    string myStr;
+
+    cout << "Nombre del archivo: ";
+    getline(cin, myStr);
+
+    ifstream myFile(myStr);
+    if (myFile.is_open()) {
+        cout << "Leyendo el archivo..." << endl;
+        myFile >> *this->myListRef;
+        myFile.close();
+        cout << "Archivo Leido" << endl;
+        this->enterToContinue();
+    } else {
+        cout << "Error al abrir el Archivo" << endl;
+        this->enterToContinue();
+    }
 }
 
 void RecipeInterface::enterToContinue() {

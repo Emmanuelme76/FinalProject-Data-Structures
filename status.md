@@ -13,8 +13,9 @@
 - [x] Debo arreglar los constructores y el operador de asignacion o en su caso seguir usando direcciones de memoria
 
 ## Escritura al disco y Lectura al disco
-- [ ] Debo implementar una logica para escribir al disco
-- [ ] Debo implementar una logica para leer desde el disco
+- [x] Debo implementar una logica para escribir al disco
+- [x] Debo implementar una logica para leer desde el disco
+    - Puedo escribir pero no leer, probablemente los metodos de lectura de la lista se peleen
 
 ## Editar Receta
 

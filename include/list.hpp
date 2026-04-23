@@ -532,7 +532,7 @@ List<T, ARRAYSIZE>& List<T, ARRAYSIZE>::operator=(const List& other) {
 
 template <class X, int Z>
 ostream& operator<<(ostream& os, const List<X, Z>& l) {
-  int i(0);
+  /*int i(0);
 
   while (i <= l.last) {
     os << l.data[i] << std::endl;
@@ -540,12 +540,21 @@ ostream& operator<<(ostream& os, const List<X, Z>& l) {
     i++;
   }
 
-  return os;
+  return os;*/
+
+  os << (l.last + 1) << "\n"; 
+
+    int i = 0;
+    while (i <= l.last) {
+        os << l.data[i] << "\n";
+        i++;
+    }
+    return os;
 }
 
 template <class X, int Z>
 istream& operator>>(istream& is, List<X, Z>& l) {
-  X myObj;
+  /*X myObj;
 
   try {
     while (!is.eof()) {
@@ -557,7 +566,24 @@ istream& operator>>(istream& is, List<X, Z>& l) {
   } catch (const typename List<X, Z>::Exception& ex) {
   }
 
-  return is;
+  return is;*/
+
+  string sizeStr;
+    if (!getline(is >> std::ws, sizeStr)) return is; 
+    int size = 0;
+    try {
+        size = stoi(sizeStr);
+    } catch (const std::invalid_argument& e) {
+        cout << "\n[ERROR CRITICO] stoi intento convertir esto en numero y fallo: '" << sizeStr << "'" << endl;
+        return is; 
+    }
+    X myObj;
+
+    for (int i = 0; i < size; i++) {
+        is >> myObj;
+        l.instData(l.getLastPos(), myObj); 
+    }
+    return is;
 }
 
 // Explicitas

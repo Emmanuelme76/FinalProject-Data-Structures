@@ -97,16 +97,16 @@ void Time::deserialize(const string& str) {  // HH:MM
 istream& operator>>(istream& is, Time& t) {
     string myStr;
 
-    getline(is, myStr, ';');
+    getline(is >> std::ws, myStr);
     t.hours = stoi(myStr);
-    getline(is, myStr, ';');
+    getline(is >> std::ws, myStr);
     t.minutes = stoi(myStr);
 
     return is;
 }
 
 ostream& operator<<(ostream& os, const Time& t) {
-    os << t.hours << ';';
+    os << t.hours << "\n";
     os << t.minutes;
 
     return os;

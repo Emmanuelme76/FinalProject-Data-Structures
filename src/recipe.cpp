@@ -155,26 +155,24 @@ void Recipe::deserialize(const string&) {}
 istream& operator >> (istream& is, Recipe& r) {
     string myStr;
 
-    getline(is, myStr, ';');
-    r.name = myStr;
+    getline(is >> std::ws, r.name);
+    r.ingredientList.delAll();
     is >> r.ingredientList;
     is >> r.preparationTime;
-    getline(is, myStr, ';');
-    r.instructions = myStr;
+    getline(is >> std::ws, r.instructions);
     is >> r.author;
-    getline(is, myStr, ';');
-    r.category = myStr;
+    getline(is >> std::ws, r.category);
 
     return is;
 }
 
 ostream& operator << (ostream& os, const Recipe& r) {
-    os << r.name << ';';
+    os << r.name << "\n";
     os << r.ingredientList; 
-    os << r.preparationTime;
-    os << r.instructions << ';';
-    os << r.author << ';';
-    os << r.category << '#';
+    os << r.preparationTime << "\n";
+    os << r.instructions << "\n";
+    os << r.author << "\n";
+    os << r.category << "\n";
 
     return os;
 
