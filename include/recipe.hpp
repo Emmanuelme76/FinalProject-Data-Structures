@@ -10,12 +10,12 @@
 #include "ingredientinterface.hpp"
 #include "name.hpp"
 #include "time.hpp"
-#include "list.hpp"
+#include "sllist.hpp"
 
 class Recipe{
 private:
     std::string name;
-    List<Ingredient> ingredientList;
+    SLList<Ingredient> ingredientList;
     Time preparationTime;
     std::string instructions;
     Name author;
@@ -28,8 +28,8 @@ public:
     ~Recipe();
 
     std::string getName()const;
-    List<Ingredient>& getListIngredient();
-    const List<Ingredient>& getListIngredient() const;
+    SLList<Ingredient>& getListIngredient();
+    const SLList<Ingredient>& getListIngredient() const;
     Time getPreparationTime()const;
     std::string getInstructions()const;
     Name getAuthor()const;
@@ -39,7 +39,7 @@ public:
     static std::string toStringWithIngredientList(const Recipe);
 
     void setName(const std::string&);
-    void setIngredientList(const List<Ingredient>&);
+    void setIngredientList(const SLList<Ingredient>&);
     void setPreparationTime(const Time&);
     void setInstructions(const std::string&);
     void setAuthor(const Name&);

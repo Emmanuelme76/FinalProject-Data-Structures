@@ -79,15 +79,15 @@ void IngredientInterface::delIngredient() {
     string name;
     Ingredient myIngredient;
     char op;
-    int pos;
+    SLList<Ingredient>::Position pos;
 
     do{
         cout << "Ingrese el nombre del ingrediente a eliminar: ";
         getline(cin, name);
         myIngredient.setName(name);
 
-        pos = this->myListRef->findDataL(myIngredient, Ingredient::compareByName);
-        if(pos != -1){
+        pos = this->myListRef->findData(myIngredient, Ingredient::compareByName);
+        if(pos != nullptr){
             this->myListRef->delData(pos);
             cout << "Ingrediente eliminado." << endl;
             this->enterToContinue();
@@ -133,15 +133,15 @@ void IngredientInterface::delAllIngredients() {
 void IngredientInterface::editIngredient() {
     string name;
     Ingredient searchIngredient;
-    int pos;
+    SLList<Ingredient>::Position pos;
     int opc;
 
     cout << "Ingrese el nombre del ingrediente a editar: ";
     getline(cin, name);
     searchIngredient.setName(name);
-    pos = this->myListRef->findDataL(searchIngredient, Ingredient::compareByName);
-    if (pos != -1) {
-        Ingredient& myIngredient = this->myListRef->retreive(pos);
+    pos = this->myListRef->findData(searchIngredient, Ingredient::compareByName);
+    if (pos != nullptr) {
+        Ingredient& myIngredient = this->myListRef->retrieve(pos);
 
         do{
             cout << "Ingrediente actual: " << myIngredient.getName() << " - " << myIngredient.getAmount() << endl;
@@ -203,4 +203,4 @@ void IngredientInterface::enterToContinue() {
     cin.get();
 }
 
-IngredientInterface::IngredientInterface(List<Ingredient>& l) : myListRef(&l) {}
+IngredientInterface::IngredientInterface(SLList<Ingredient>& l) : myListRef(&l) {}

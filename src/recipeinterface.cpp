@@ -162,7 +162,7 @@ void RecipeInterface::addRecipe() {
     IngredientInterface ingredientInterface(myRecipe.getListIngredient());
     ingredientInterface.mainMenu();
 
-    this->myListRef->instData(this->myListRef->getLastPos(), myRecipe);
+    this->myListRef->insData(this->myListRef->getLastPos(), myRecipe);
 
     cout << "Receta agregada exitosamente." << endl;
     this->enterToContinue();
@@ -188,13 +188,13 @@ void RecipeInterface::delRecipe() {
     string name;
     Recipe myRecipe;
     char op;
-    int pos;
+    DLList<Recipe>::Position pos;
 
     cout << "Ingrese el nombre de la receta a eliminar: ";
     getline(cin, name);
     myRecipe.setName(name);
     pos = this->myListRef->findData(myRecipe);
-    if (pos != -1) {
+    if (pos != nullptr) {
         this->myListRef->delData(pos);
         cout << "Receta eliminada." << endl;
         this->enterToContinue();
@@ -225,17 +225,18 @@ void RecipeInterface::delAllRecipes(){
 void RecipeInterface::editRecipe() {
     string myStr;
     Recipe searchRecipe;
-    int pos, editOpc, categoryOpc;
+    int editOpc, categoryOpc;
     char op;
     Time myTime;
     Name myName;
+    DLList<Recipe>::Position pos;
 
     cout << "Nombre de la receta a editar: ";
     getline(cin, myStr);
     searchRecipe.setName(myStr);
-    pos = this->myListRef->findDataL(searchRecipe);
-    if (pos != -1) {
-        Recipe& recipeToEdit = this->myListRef->retreive(pos);
+    pos = this->myListRef->findData(searchRecipe);
+    if (pos != nullptr) {
+        Recipe& recipeToEdit = this->myListRef->retrieve(pos);
 
         do{
         cout << "Que desea editar?" << endl;
@@ -360,7 +361,7 @@ void RecipeInterface::editRecipe() {
 
 void RecipeInterface::showList() {
     char op;
-    int pos(this->myListRef->getFirstPos());
+    DLList<Recipe>::Position pos(this->myListRef->getFirstPos());
     int opcFilt;
     Recipe myRecipe;
     string category;
@@ -418,8 +419,8 @@ void RecipeInterface::showList() {
            } while (op != 'S' && op != 'N');
             if(op == 'S'){
                 cout << "Lista de recetas con ingredientes:" << endl;
-                while(pos != -1){
-                    cout << this->myListRef->retreive(pos).toString(true);
+                while(pos != nullptr){
+                    cout << this->myListRef->retrieve(pos).toString(true);
 
                     pos = this->myListRef->getNextPos(pos);
                 }
@@ -451,10 +452,10 @@ void RecipeInterface::showList() {
 
            if(op == 'S'){
                 cout << "Lista de recetas con ingredientes:" << endl << endl;
-                while(pos != -1){
+                while(pos != nullptr){
 
-                    if((this->myListRef->retreive(pos).getCategory()) == category) {
-                       cout << this->myListRef->retreive(pos).toString(true);
+                    if((this->myListRef->retrieve(pos).getCategory()) == category) {
+                       cout << this->myListRef->retrieve(pos).toString(true);
                     }
 
                     pos = this->myListRef->getNextPos(pos);
@@ -463,10 +464,10 @@ void RecipeInterface::showList() {
             }
                 else {
                     cout << "Lista de recetas sin ingredientes:" << endl << endl;
-                    while(pos != -1){
+                    while(pos != nullptr){
 
-                    if((this->myListRef->retreive(pos).getCategory()) == category) {
-                        cout << this->myListRef->retreive(pos).toString() << endl;
+                    if((this->myListRef->retrieve(pos).getCategory()) == category) {
+                        cout << this->myListRef->retrieve(pos).toString() << endl;
                     }
 
                     pos = this->myListRef->getNextPos(pos);
@@ -482,8 +483,9 @@ void RecipeInterface::showList() {
 
 void RecipeInterface::searchRecipe() {
     string myStr;
-    int pos, opc, categoryOpc;
+    int opc, categoryOpc;
     Recipe myRecipe;
+    DLList<Recipe>::Position pos;
 
     do{
         cout << "Criterio de busqueda" << endl;
@@ -501,11 +503,11 @@ void RecipeInterface::searchRecipe() {
         getline(cin, myStr);
         myRecipe.setName(myStr);
         
-        pos = this->myListRef->findDataL(myRecipe);
+        pos = this->myListRef->findData(myRecipe);
     
-        if (pos != -1) {
+        if (pos != nullptr) {
             cout << "Receta encontrada!" << endl << endl;
-            Recipe &newRecipe = this->myListRef->retreive(pos);
+            Recipe &newRecipe = this->myListRef->retrieve(pos);
             cout << newRecipe.toString(true);
         }
         else {
@@ -546,8 +548,8 @@ void RecipeInterface::searchRecipe() {
                         }
 
                 }  while(categoryOpc < 1 || categoryOpc > 4);
-                pos = this->myListRef->findDataL(myRecipe, Recipe::compareByCategory);
-                Recipe &newRecipe = this->myListRef->retreive(pos);
+                pos = this->myListRef->findData(myRecipe, Recipe::compareByCategory);
+                Recipe &newRecipe = this->myListRef->retrieve(pos);
                 
                 cout << newRecipe.toString(true);   
     }
@@ -555,6 +557,8 @@ void RecipeInterface::searchRecipe() {
 }
 
 void RecipeInterface::sortData() {
+    cout << "OPcion en mantenimiento" << endl;
+    /*
     int opc;
     do{
         cout << "Como quieres oredenar las recetas?" << endl;
@@ -584,10 +588,12 @@ void RecipeInterface::sortData() {
     }
     else {
         cout << "La lista no se pudo ordenar" << endl;
-    }
+    }*/
 }
 
 void RecipeInterface::writeToDisk() {
+    cout << "Opcion en mantenimiento" << endl;
+    /*
     string myStr;
 
     cout << "Nombre del archivo: ";
@@ -604,11 +610,13 @@ void RecipeInterface::writeToDisk() {
   } else {
     cout << "Error al abrir el Archivo" << endl;
     this->enterToContinue();
-  }
+  }*/
 
 }
 
 void RecipeInterface::readFromDisk() {
+    cout << "Opcion en mantenimiento" << endl;
+    /*
     string myStr;
 
     cout << "Nombre del archivo: ";
@@ -624,7 +632,7 @@ void RecipeInterface::readFromDisk() {
     } else {
         cout << "Error al abrir el Archivo" << endl;
         this->enterToContinue();
-    }
+    }*/
 }
 
 void RecipeInterface::enterToContinue() {
@@ -634,7 +642,7 @@ void RecipeInterface::enterToContinue() {
 }
 
 
-RecipeInterface::RecipeInterface(List<Recipe>& l) : myListRef(&l) {
+RecipeInterface::RecipeInterface(DLList<Recipe>& l) : myListRef(&l) {
     this->menu();
     this->mainMenu();
 }

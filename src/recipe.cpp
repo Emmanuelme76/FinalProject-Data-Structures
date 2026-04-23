@@ -13,11 +13,11 @@ string Recipe::getName() const {
     return this->name;
 }
 
-List<Ingredient>& Recipe::getListIngredient() {
+SLList<Ingredient>& Recipe::getListIngredient() {
     return this->ingredientList;
 }
 
-const List<Ingredient>& Recipe::getListIngredient() const {
+const SLList<Ingredient>& Recipe::getListIngredient() const {
     return this->ingredientList;
 }
 
@@ -62,7 +62,7 @@ void Recipe::setName(const string& n) {
     this->name = n;
 }
 
-void Recipe::setIngredientList(const List<Ingredient>& l) {
+void Recipe::setIngredientList(const SLList<Ingredient>& l) {
     this->ingredientList = l;
 }
 

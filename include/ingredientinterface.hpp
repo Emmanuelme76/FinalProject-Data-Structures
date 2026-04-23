@@ -5,12 +5,12 @@
 #include <fstream>
 #include <iostream>
 
-#include "list.hpp"
+#include "sllist.hpp"
 #include "ingredient.hpp"
 
 class IngredientInterface{
 private:
-    List<Ingredient>* myListRef;
+    SLList<Ingredient>* myListRef;
 
 public:
     void mainMenu();
@@ -28,7 +28,7 @@ public:
     void enterToContinue();
 
 public:
-    IngredientInterface(List<Ingredient>&);
+    IngredientInterface(SLList<Ingredient>&);
 
 };
 

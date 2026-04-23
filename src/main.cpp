@@ -1,6 +1,6 @@
 #include "recipeinterface.hpp"
-#include "list.hpp"
+#include "dllist.hpp"
 
 int main() {
-    new RecipeInterface(*new List<Recipe>);
+    new RecipeInterface(*new DLList<Recipe>);
 }

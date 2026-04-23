@@ -5,14 +5,14 @@
 #include <fstream>
 #include <iostream>
 
-#include "list.hpp"
+#include "dllist.hpp"
 #include "recipe.hpp"
 
 
 
 class RecipeInterface{
 private:
-    List<Recipe>* myListRef;
+    DLList<Recipe>* myListRef;
 
     void menu();
     
@@ -39,7 +39,7 @@ private:
     void enterToContinue();
     
     public:
-    RecipeInterface(List<Recipe>&);
+    RecipeInterface(DLList<Recipe>&);
 };
 
 #endif // __RECIPEINTERFACE_HPP__
