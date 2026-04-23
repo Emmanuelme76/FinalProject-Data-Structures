@@ -7,10 +7,14 @@
 
 ## Solucionar Categoria
 - [x] Debo de solucionar porque las categorias no aparecen, quizas sea un problema del constructor o del **operador de asignacion!!** (si era)
-- [ ] Debo de implementar logica que filtre por categorias
+- [x] Debo de implementar logica que filtre por categorias 
+    - ya casi esta solo debo pensar como recorrer al encontrar cada elemento con esa categoria, probablemente deba usar una iteracion donde el limite sea -1, y vaya realizando una comparacion con la categoria, así que la explicita puede no ser tan necesaria en este caso
 
-## Escritura al disco
-- [ ]Debo implementar una logica para escribir al disco
+- [x] Debo arreglar los constructores y el operador de asignacion o en su caso seguir usando direcciones de memoria
+
+## Escritura al disco y Lectura al disco
+- [ ] Debo implementar una logica para escribir al disco
+- [ ] Debo implementar una logica para leer desde el disco
 
 ## Editar Receta
 
@@ -46,7 +50,7 @@ Mi hipotesis principal es que probablemente la problematica no esté en la inter
 - [x] ~~no funciona el (s/n) de eliminar ingredientes~~
 
 ## Buscar Receta
-- [ ] Implementar un metodo de busqueda de receta a través del nombre del platillo, o bien a través de su categoría (el primero en encontrarse) (Debo hacer comparaciones explicitas)
+- [x] Implementar un metodo de busqueda de receta a través del nombre del platillo, o bien a través de su categoría (el primero en encontrarse) (Debo hacer comparaciones explicitas)
 
 ## Agregar Receta
 ### Ingredientes

@@ -329,12 +329,12 @@ void RecipeInterface::editRecipe() {
         if (!(editOpc < 1 || editOpc > 6)) {
 
             
-            cout << "Deseas editar otro elemento de la Receta?. (s/n): ";
-            cin >> op;
-            op = toupper(op);
-            cin.ignore();
-            
             do{
+                cout << "Deseas editar otro elemento de la Receta?. (s/n): ";
+                cin >> op;
+                op = toupper(op);
+                cin.ignore();
+            
                if(op != 'S' && op != 'N'){
                cout << "Opción inválida." << endl; 
                this->enterToContinue();
@@ -361,43 +361,209 @@ void RecipeInterface::editRecipe() {
 void RecipeInterface::showList() {
     char op;
     int pos(this->myListRef->getFirstPos());
-
+    int opcFilt;
+    Recipe myRecipe;
+    string category;
+    
     if (this->myListRef->isEmpty()) {
         cout << "La lista de recetas está vacía." << endl;
     } 
     else {
-        cout <<"Con ingredientes o sin ingredientes? (s/n): ";
-        cin >> op;
-        cin.ignore();
-        op = toupper(op);
-        if(op == 'S'){
-            cout << "Lista de recetas con ingredientes:" << endl;
-            while(pos != -1){
-                cout << this->myListRef->retreive(pos).toString(true);
+        do{
 
-                pos = this->myListRef->getNextPos(pos);
+            cout << "Filtrar recetas por categoria?" << endl;
+            cout << "1. Desayuno" << endl;
+            cout << "2. Comida" << endl;
+            cout << "3. Cena" << endl;
+            cout << "4. Navidad" << endl;
+            cout << "5. Mostrar todas las recetas" << endl;
+            cout << "Selecciona una opcion: ";
+            cin >> opcFilt;
+            cin.ignore();
+
+            if(opcFilt < 1 || opcFilt > 5) {
+                cout << "Opcion invalida, elija una opcion valida" << endl;
             }
+
+        } while (opcFilt < 1 || opcFilt > 5);
+
+        switch (opcFilt)
+        {
+        case 1:
+            myRecipe.setCategory("Desayuno");
+            category = myRecipe.getCategory();
+            break;
+        case 2:
+            myRecipe.setCategory("Comida");
+            category = myRecipe.getCategory();
+            break;
+        case 3:
+            myRecipe.setCategory("Cena");
+            category = myRecipe.getCategory();
+            break;
+        case 4:
+            myRecipe.setCategory("Navidad");
+            category = myRecipe.getCategory();
+            break;
+        case 5:
+            do {
+                cout <<"Con ingredientes o sin ingredientes? (s/n): ";
+                cin >> op;
+                cin.ignore();
+                op = toupper(op);
+                if(op != 'S' && op != 'N'){
+                    cout << "Opción inválida." << endl; 
+                    this->enterToContinue();
+               }
+           } while (op != 'S' && op != 'N');
+            if(op == 'S'){
+                cout << "Lista de recetas con ingredientes:" << endl;
+                while(pos != -1){
+                    cout << this->myListRef->retreive(pos).toString(true);
+
+                    pos = this->myListRef->getNextPos(pos);
+                }
+
+            }
+                else {
+                    cout << "Lista de recetas sin ingredientes:" << endl;
+                    cout << this->myListRef->toString();
+                }
+
+            break;
+
+        default:
+            cout << "Opción inválida. Por favor, seleccione una opción válida." << endl;
+            break;
+        }
+
+        if (opcFilt >= 1 && opcFilt < 5) {
+             do {
+                cout <<"Con ingredientes o sin ingredientes? (s/n): ";
+                cin >> op;
+                cin.ignore();
+                op = toupper(op);
+                if(op != 'S' && op != 'N'){
+                    cout << "Opción inválida." << endl; 
+                    this->enterToContinue();
+               }
+           } while (op != 'S' && op != 'N');
+
+           if(op == 'S'){
+                cout << "Lista de recetas con ingredientes:" << endl << endl;
+                while(pos != -1){
+
+                    if((this->myListRef->retreive(pos).getCategory()) == category) {
+                       cout << this->myListRef->retreive(pos).toString(true);
+                    }
+
+                    pos = this->myListRef->getNextPos(pos);
+                }
+
+            }
+                else {
+                    cout << "Lista de recetas sin ingredientes:" << endl << endl;
+                    while(pos != -1){
+
+                    if((this->myListRef->retreive(pos).getCategory()) == category) {
+                        cout << this->myListRef->retreive(pos).toString() << endl;
+                    }
+
+                    pos = this->myListRef->getNextPos(pos);
+                }
+                }
 
         }
-            else {
-                cout << "Lista de recetas sin ingredientes:" << endl;
-                cout << this->myListRef->toString();
-            }
+
+
         
     }
 }
 
-void RecipeInterface::searchRecipe()
-{
+void RecipeInterface::searchRecipe() {
+    string myStr;
+    int pos, opc, categoryOpc;
+    Recipe myRecipe;
+
+    do{
+        cout << "Criterio de busqueda" << endl;
+        cout << "1. Nombre del platillo" << endl;
+        cout << "2. Categoria" << endl;
+        cin >> opc;
+        cin.ignore();
+        if(opc < 1 || opc > 2){
+            cout << "Opcion invalida, escoge una opcion valida" << endl;
+        }
+    } while(opc < 1 || opc > 2);
+
+    if (opc == 1) {
+        cout << "Nombre de la receta a encontrar: ";
+        getline(cin, myStr);
+        myRecipe.setName(myStr);
+        
+        pos = this->myListRef->findDataL(myRecipe);
     
+        if (pos != -1) {
+            cout << "Receta encontrada!" << endl << endl;
+            Recipe &newRecipe = this->myListRef->retreive(pos);
+            cout << newRecipe.toString(true);
+        }
+        else {
+            cout << "La receta no se encontro" << endl;
+        }
+
+    }
+    else {
+        
+         do{
+                cout << "Ingrese la categoría: " <<endl << endl;
+                cout << "Categoría de la receta " << endl;
+                cout << "1. Desayuno" << endl;
+                cout << "2. Comida" << endl;
+                cout << "3. Cena" << endl;
+                cout << "4. Navidad" << endl;
+                cout << "Seleccione una opción: ";
+                cin >> categoryOpc;
+                cin.ignore();
+
+                    switch (categoryOpc) {
+                        case 1:
+                            myRecipe.setCategory("Desayuno");
+                            break;
+                        case 2:
+                            myRecipe.setCategory("Comida");
+                            break;
+                        case 3:
+                            myRecipe.setCategory("Cena");
+                            break;
+                        case 4:
+                            myRecipe.setCategory("Navidad");
+                            break;
+
+                        default:
+                            cout << "Opción inválida. Por favor, seleccione una opción válida." << endl;
+                            break;
+                        }
+
+                }  while(categoryOpc < 1 || categoryOpc > 4);
+                pos = this->myListRef->findDataL(myRecipe, Recipe::compareByCategory);
+                Recipe &newRecipe = this->myListRef->retreive(pos);
+                
+                cout << newRecipe.toString(true);   
+    }
+
 }
 
 void RecipeInterface::sortData() {
     int opc;
     do{
-        cout << "Como quieres oredenar las recetas?";
-        cout << "1. Por Nombre";
-        cout << "2. Por tiempo de preparacion";
+        cout << "Como quieres oredenar las recetas?" << endl;
+        cout << "1. Por Nombre" << endl;
+        cout << "2. Por tiempo de preparacion" << endl;
+        cout << "Selecciona una opcion: ";
+        cin >> opc;
+        cin.ignore();
+
         switch (opc) {
         case 1:
             this->myListRef->sortDataQuick(Recipe::compareByName);
@@ -410,7 +576,15 @@ void RecipeInterface::sortData() {
             cout << "Opcion Invalida" << endl;
             break;
         }
-    } while(opc < 1 || opc < 2);
+    } while(opc < 1 || opc > 2);
+
+    if((this->myListRef->isSorted(Recipe::compareByName)) ||
+       (this->myListRef->isSorted(Recipe::compareByPreparationTime))) {
+        cout << "La lista se ordeno" << endl;
+    }
+    else {
+        cout << "La lista no se pudo ordenar" << endl;
+    }
 }
 
 void RecipeInterface::writeToDisk() {
