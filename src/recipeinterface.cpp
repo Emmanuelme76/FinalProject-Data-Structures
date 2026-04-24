@@ -557,8 +557,6 @@ void RecipeInterface::searchRecipe() {
 }
 
 void RecipeInterface::sortData() {
-    cout << "OPcion en mantenimiento" << endl;
-    /*
     int opc;
     do{
         cout << "Como quieres oredenar las recetas?" << endl;
@@ -570,10 +568,10 @@ void RecipeInterface::sortData() {
 
         switch (opc) {
         case 1:
-            this->myListRef->sortDataQuick(Recipe::compareByName);
+            this->myListRef->sort(Recipe::compareByName);
             break;
         case 2:
-            this->myListRef->sortDataQuick(Recipe::compareByPreparationTime);
+            this->myListRef->sort(Recipe::compareByPreparationTime);
             break;
         
         default:
@@ -588,7 +586,7 @@ void RecipeInterface::sortData() {
     }
     else {
         cout << "La lista no se pudo ordenar" << endl;
-    }*/
+    }
 }
 
 void RecipeInterface::writeToDisk() {

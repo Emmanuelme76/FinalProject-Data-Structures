@@ -69,6 +69,11 @@ class DLList {
 
   void addData(const DLList<T>&);
 
+  void swap(const Position&, const Position&);
+
+  void quickSort(const Position&, const Position&);
+  void quickSort(const Position&, const Position&, const function<int(const T&, const T&)>&);
+
  public:
   DLList();
 
@@ -93,6 +98,11 @@ class DLList {
   Position findData(const T&) const;  // dato
 
   T& retrieve(const Position&);
+
+  bool isSorted();
+  bool isSorted(const function<int(const T&, const T&)>&);
+  void sort();
+  void sort(const function<int(const T&, const T&)>&);
 
   string toString() const;
 
@@ -414,6 +424,160 @@ istream& operator>>(istream&, DLList<X>&) {
   // Pendiente
 }
 
+template<class T>
+bool DLList<T>::isSorted() {
+  if(this->isEmpty() || this->header->getNext() == this->header) {
+    return true;
+  }
+
+  Position aux(this->header->getNext());
+
+  while(aux->getNext() != this->header) {
+    if(aux->getData() > aux->getNext()->getData()) {
+      return false;
+    }
+
+    aux = aux->getNext();
+
+  }
+  return true;
+}
+
+template<class T>
+bool DLList<T>::isSorted(const function<int(const T&, const T&)>& cmp) {
+  if(this->isEmpty() || this->header->getNext() == this->header) {
+    return true;
+  }
+
+  Position aux(this->header->getNext());
+
+  while(aux->getNext() != this->header) {
+    if(cmp(aux->getData(), aux->getNext()->getData()) > 0) {
+      return false;
+    }
+
+    aux = aux->getNext();
+
+  }
+  return true;
+}
+
+//Metodos para ordenar
+
+template<class T>
+void DLList<T>::swap(const Position& a, const Position& b) {
+  if(a != b) {
+    T* aux(a->getDataPtr());
+    a->setDataPtr(b->getDataPtr());
+    b->setDataPtr(aux);
+  }
+}
+
+template<class T>
+void DLList<T>::sort(){
+  this->quickSort(this->header->getNext(), this->header->getPrev());
+}
+
+template<class T>
+void DLList<T>::quickSort(const Position& left, const Position& right) {
+  if(left == right) { // un solo elemento, criterio de paro 1
+    return;
+  }
+
+  if(left->getNext() == right) { // dos elementos, criterio de paro 2
+    if(left->getData() > right->getData()) {
+      this->swap(left, right);
+    }
+
+    return;
+
+  }
+
+  // separacion
+  const T& pivot(right->getData());
+  Position i(left), j(right);
+
+  while (i != j) {
+    while(i != j and i->getData() <= pivot) {
+      i = i->getNext();
+    }
+
+    while(i != j and j->getData() >= pivot) {
+      j = j->getPrev();
+    }
+
+    this->swap(i, j);
+
+  } 
+
+  this->swap(i, right);
+
+  //divide y venceras
+  if(left != i) {
+    this->quickSort(left, i->getPrev());
+  }
+
+  if(i != right) {
+    this->quickSort(i->getNext(), right);
+  }
+
+
+}
+
+template<class T>
+void DLList<T>::sort(const function<int(const T&, const T&)>& cmp){
+  this->quickSort(this->header->getNext(), this->header->getPrev(), cmp);
+}
+
+template<class T>
+void DLList<T>::quickSort(const Position& left, const Position& right, const function<int(const T&, const T&)>& cmp) {
+  if(left == right) { // un solo elemento, criterio de paro 1
+    return;
+  }
+
+  if(left->getNext() == right) { // dos elementos, criterio de paro 2
+    if(cmp(left->getData(), right->getData()) > 0) {
+      this->swap(left, right);
+    }
+
+    return;
+
+  }
+
+  // separacion
+  const T& pivot(right->getData());
+  Position i(left), j(right);
+
+  while (i != j) {
+    while(i != j and cmp(i->getData(), pivot) <= 0) {
+      i = i->getNext();
+    }
+
+    while(i != j and cmp(j->getData(), pivot) >= 0) {
+      j = j->getPrev();
+    }
+
+    this->swap(i, j);
+
+  } 
+
+  this->swap(i, right);
+
+  //divide y venceras
+  if(left != i) {
+    this->quickSort(left, i->getPrev(), cmp);
+  }
+
+  if(i != right) {
+    this->quickSort(i->getNext(), right, cmp);
+  }
+
+
+}
+
+
+
+
 #endif  // __DLLIST_HPP__
 
-//Comprender el try catch de 250
+//Comprender el try catch de 290

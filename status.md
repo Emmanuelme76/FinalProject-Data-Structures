@@ -15,6 +15,7 @@
 
 ## Haciendo
 
+
 ## Terminado
 
 - [x] Remplazar la lista que usa los ingredientes por una simplemente ligada
@@ -24,3 +25,7 @@
 - [x] Cambiar logica de insertSortedData
 
 - [x] Ambas listas deben de cambiar el nombre y sus guardas
+
+- [x] Implementar el quicksort de la doblemente ligada
+
+- [x] Hacer un metodo para saber si está ordenada
