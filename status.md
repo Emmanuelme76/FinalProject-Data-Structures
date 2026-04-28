@@ -15,6 +15,9 @@
 
 ## Haciendo
 
+- [ ] Comparar la salida con el diseño 
+- [ ] Ir probando salidas mas esteticas 
+
 
 ## Terminado
 

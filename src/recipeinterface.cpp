@@ -31,18 +31,20 @@ void RecipeInterface::mainMenu() {
     int opc;
     do{
         cout << "***********************" << endl;
+        cout << "*                     *" << endl;
         cout << "*    Menú Principal   *" << endl;
-        cout << "***********************" << endl;
-        cout << "1. Agregar receta" << endl;
-        cout << "2. Eliminar receta" << endl;
-        cout << "3. Editar receta" << endl;
-        cout << "4. Buscar una receta" << endl;
-        cout << "5. Mostrar lista de recetas" << endl;
-        cout << "6. Ordenar recetas" << endl;
-        cout << "7. Guardar recetas en disco" << endl;
-        cout << "8. Cargar recetas desde disco" << endl;
-        cout << "9. Eliminar todas las recetas" << endl;
-        cout << "10. Salir" << endl;
+        cout << "*                     *" << endl;
+        cout << "***********************" << endl << endl;
+        cout << "1. Agregar receta" << endl << endl;
+        cout << "2. Eliminar receta" << endl << endl;
+        cout << "3. Editar receta" << endl << endl;
+        cout << "4. Buscar una receta" << endl << endl;
+        cout << "5. Mostrar lista de recetas" << endl << endl;
+        cout << "6. Ordenar recetas" << endl << endl;
+        cout << "7. Guardar recetas en disco" << endl << endl;
+        cout << "8. Cargar recetas desde disco" << endl << endl;
+        cout << "9. Eliminar todas las recetas" << endl << endl;
+        cout << "10. Salir" << endl << endl;
         cout << "Seleccione una opción: ";
         cin >> opc;
         cin.ignore();
@@ -80,7 +82,7 @@ void RecipeInterface::mainMenu() {
                 this->enterToContinue();
                 break;
             default:
-                cout << "Opción inválida. Por favor, seleccione una opción válida." << endl;
+                cout << "Opción inválida. Por favor, seleccione una opción válida." << endl << endl;
         }
 
     } while(opc != 10);
