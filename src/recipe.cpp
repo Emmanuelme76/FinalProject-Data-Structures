@@ -148,10 +148,39 @@ int Recipe::compareByCategory(const Recipe& a, const Recipe& b) {
     return a.category.compare(b.category); 
 }
 
-string Recipe::serialize() const {}
+string Recipe::serialize() const {
+    string result;
 
-void Recipe::deserialize(const string&) {}
+    result+= this->name + '*';
+    result+= this->preparationTime.serialize() + '*';
+    result+= this->instructions + '*';
+    result+= this->author.serialize() + '*';
+    result+= this->category + '*';
+    result+= this->ingredientList.serialize('@');
 
+    return result;
+}
+
+void Recipe::deserialize(const string& str) {
+    stringstream mySStr(str);
+    string myStr;
+
+    getline(mySStr, this->name, '*');
+
+    getline(mySStr, myStr, '*');
+    this->preparationTime.deserialize(myStr);
+
+    getline(mySStr, this->instructions, '*');
+    
+    getline(mySStr, myStr, '*');
+    this->author.deserialize(myStr);
+
+    getline(mySStr, this->category, '*');
+    
+    getline(mySStr, myStr);
+    this->ingredientList.deserialize(myStr, '@');
+}
+/*
 istream& operator >> (istream& is, Recipe& r) {
     string myStr;
 
@@ -177,3 +206,4 @@ ostream& operator << (ostream& os, const Recipe& r) {
     return os;
 
 }
+*/

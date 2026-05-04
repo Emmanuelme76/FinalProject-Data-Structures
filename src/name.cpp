@@ -81,10 +81,14 @@ int Name::compareByFirst(const Name& a, const Name& b) {
 //Pendiente
 
 string Name::serialize() const {
-    return this->toString();
+    return this->last + ',' + this->first;
 }
 
 void Name::deserialize(const string& str) {
+    stringstream mySStr(str);
+
+    getline(mySStr, this->last, ',');
+    getline(mySStr, this->first, '*');
 
 }
 

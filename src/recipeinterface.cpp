@@ -592,47 +592,54 @@ void RecipeInterface::sortData() {
 }
 
 void RecipeInterface::writeToDisk() {
-    cout << "Opcion en mantenimiento" << endl;
-    /*
-    string myStr;
+    string fileName;
 
+    cout << "Escritura al Disco" << endl << endl;
+    
     cout << "Nombre del archivo: ";
-    getline(cin, myStr);
+    getline(cin, fileName);
 
-    ofstream myFile(myStr, ios_base::trunc);
-  if (myFile.is_open()) {
-    cout << "Escribiendo al archivo..." << endl;
-    myFile << *this->myListRef;
-    myFile.close();
-    cout << "Archivo Escrito exitosamente" << endl;
+    cout << endl << endl;
 
-    this->enterToContinue();
-  } else {
-    cout << "Error al abrir el Archivo" << endl;
-    this->enterToContinue();
-  }*/
+    ofstream myFile(fileName, ios_base::trunc);
+    
+    if (myFile.is_open()) {
+        cout << "Escribiendo al archivo..." << endl;
+        myFile << this->myListRef->serialize();
+        myFile.close();
+        cout << "Archivo Escrito exitosamente" << endl;
+
+        this->enterToContinue();
+    } 
+    else {
+        cout << "Error al abrir el Archivo" << fileName << " no se pudo abrir para escritura" << endl;
+        this->enterToContinue();
+    }
 
 }
 
 void RecipeInterface::readFromDisk() {
-    cout << "Opcion en mantenimiento" << endl;
-    /*
-    string myStr;
+    string fileName, fileStr;
 
+    cout << "Leer al disco" << endl << endl;
+    
     cout << "Nombre del archivo: ";
-    getline(cin, myStr);
+    getline(cin, fileName);
 
-    ifstream myFile(myStr);
+    ifstream myFile(fileName);
     if (myFile.is_open()) {
         cout << "Leyendo el archivo..." << endl;
-        myFile >> *this->myListRef;
+        getline(myFile, fileStr);
         myFile.close();
+        this->myListRef->deserialize(fileStr);
         cout << "Archivo Leido" << endl;
         this->enterToContinue();
-    } else {
+
+    } 
+    else {
         cout << "Error al abrir el Archivo" << endl;
         this->enterToContinue();
-    }*/
+    }
 }
 
 void RecipeInterface::enterToContinue() {

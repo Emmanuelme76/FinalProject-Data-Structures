@@ -90,7 +90,7 @@ void Time::deserialize(const string& str) {  // HH:MM
     getline(mySStr, myStr, ':');
     this->hours = stoi(myStr);
 
-    getline(mySStr, myStr, ':');
+    getline(mySStr, myStr, '*');
     this->minutes = stoi(myStr);
 }
 

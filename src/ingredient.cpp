@@ -81,9 +81,22 @@ int Ingredient::compareByName(const Ingredient& a, const Ingredient& b) {
     return a.name.compare(b.name);
 }
 
-string Ingredient::serialize() const {}
+string Ingredient::serialize() const {
+    string result;
 
-void Ingredient::deserialize(const string&) {}
+    result += this->name + '*';
+    result += this->amount;
+
+    return result;
+}
+
+void Ingredient::deserialize(const string& str) {
+    stringstream mySStr(str);
+    string myStr;
+
+    getline(mySStr, this->name, '*');
+    getline(mySStr, this->amount, '*');
+}
 
 istream& operator >> (istream& is, Ingredient& i) {
     string myStr;

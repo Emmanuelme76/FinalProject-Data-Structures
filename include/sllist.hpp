@@ -5,6 +5,7 @@
 #include <functional>
 #include <iostream>
 #include <string>
+#include <sstream>
 
 // Definicion
 
@@ -89,6 +90,10 @@ class SLList {
   void delAll();
 
   SLList<T>& operator=(const SLList<T>&);
+
+  std::string serialize(const char& delim = '#') const;
+
+  void deserialize(const std::string&, const char& delim = '#');
 
   template <class X, int Z>
   friend ostream& operator<<(ostream&, const SLList<X>&);
@@ -360,6 +365,41 @@ SLList<T>& SLList<T>::operator=(const SLList<T>& other) {
   return *this;
 }
 
+template <class T>
+std::string SLList<T>::serialize(const char& delim) const {
+  std::string result;
+  Position aux(this->anchor);
+
+  while(aux != nullptr) {
+    result+= aux->getData().serialize() + delim;
+
+    aux = aux->getNext();
+  }
+
+  return result;
+}
+
+template <class T>
+void SLList<T>::deserialize(const std::string& str, const char& delim)  {
+  std::stringstream mySStr(str);
+  std::string myStr;
+  T myObj;
+
+  this->delAll();
+
+  while(!mySStr.eof()) {
+    getline(mySStr, myStr, delim);
+
+    if(!myStr.empty()) {
+      myObj.deserialize(myStr);
+
+      this->insData(this->getLastPos(), myObj);
+    }
+
+  }
+
+}
+/*
 template <class X>
 ostream& operator<<(ostream&, const SLList<X>&) {
   // Pendiente
@@ -368,6 +408,6 @@ ostream& operator<<(ostream&, const SLList<X>&) {
 template <class X>
 istream& operator>>(istream&, SLList<X>&) {
   // Pendiente
-}
+}*/
 
 #endif  // __SLLIST_HPP__

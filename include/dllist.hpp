@@ -5,6 +5,7 @@
 #include <functional>
 #include <iostream>
 #include <string>
+#include <sstream>
 
 // Definicion
 
@@ -109,6 +110,10 @@ class DLList {
   void delAll();
 
   DLList<T>& operator=(const DLList<T>&);
+
+  std::string serialize(const char& delim = '#') const;
+
+  void deserialize(const std::string&, const char& = '#');
 
   template <class X, int Z>
   friend ostream& operator<<(ostream&, const DLList<X>&);
@@ -414,15 +419,6 @@ DLList<T>& DLList<T>::operator=(const DLList<T>& other) {
   return *this;
 }
 
-template <class X>
-ostream& operator<<(ostream&, const DLList<X>&) {
-  // Pendiente
-}
-
-template <class X>
-istream& operator>>(istream&, DLList<X>&) {
-  // Pendiente
-}
 
 template<class T>
 bool DLList<T>::isSorted() {
@@ -455,7 +451,7 @@ bool DLList<T>::isSorted(const function<int(const T&, const T&)>& cmp) {
     if(cmp(aux->getData(), aux->getNext()->getData()) > 0) {
       return false;
     }
-
+    
     aux = aux->getNext();
 
   }
@@ -488,9 +484,9 @@ void DLList<T>::quickSort(const Position& left, const Position& right) {
     if(left->getData() > right->getData()) {
       this->swap(left, right);
     }
-
+    
     return;
-
+    
   }
 
   // separacion
@@ -505,7 +501,7 @@ void DLList<T>::quickSort(const Position& left, const Position& right) {
     while(i != j and j->getData() >= pivot) {
       j = j->getPrev();
     }
-
+    
     this->swap(i, j);
 
   } 
@@ -516,11 +512,11 @@ void DLList<T>::quickSort(const Position& left, const Position& right) {
   if(left != i) {
     this->quickSort(left, i->getPrev());
   }
-
+  
   if(i != right) {
     this->quickSort(i->getNext(), right);
   }
-
+  
 
 }
 
@@ -541,40 +537,96 @@ void DLList<T>::quickSort(const Position& left, const Position& right, const fun
     }
 
     return;
-
+    
   }
 
   // separacion
   const T& pivot(right->getData());
   Position i(left), j(right);
-
+  
   while (i != j) {
     while(i != j and cmp(i->getData(), pivot) <= 0) {
       i = i->getNext();
     }
-
+    
     while(i != j and cmp(j->getData(), pivot) >= 0) {
       j = j->getPrev();
     }
-
+    
     this->swap(i, j);
 
   } 
 
   this->swap(i, right);
-
+  
   //divide y venceras
   if(left != i) {
     this->quickSort(left, i->getPrev(), cmp);
   }
-
+  
   if(i != right) {
     this->quickSort(i->getNext(), right, cmp);
   }
 
-
+  
 }
 
+template <class T>
+std::string DLList<T>::serialize(const char& delim) const {
+  std::string result;
+  Position aux(this->header->getNext());
+
+  while (aux != this->header) {
+    result+= aux->getData().serialize() + delim;
+
+    aux = aux->getNext();
+  }
+
+  return result;
+  
+}
+template <class T>
+void DLList<T>::deserialize(const std::string& str, const char& delim) {
+  std::stringstream mySStr(str);
+  std::string myStr;
+  T myObj;
+  Position newNode;
+
+  this->delAll();
+
+  while(!mySStr.eof()) {
+    getline(mySStr, myStr, delim);
+
+    if(!myStr.empty()) {
+      myObj.deserialize(myStr);
+
+      try{
+        if((newNode = new (std::nothrow) Node(myObj)) == nullptr) {
+          throw Exception("Memoria no disponible, deserialize");
+        }
+      } catch(const typename Node::Exception& ex) {
+        throw Exception(ex.what());
+      }
+
+      newNode->setPrev(this->header->getPrev());
+      newNode->setNext(this->header);
+
+      this->header->getPrev()->setNext(newNode);
+      this->header->setPrev(newNode);
+
+    }
+  }
+}
+/*
+template <class X>
+ostream& operator<<(ostream&, const DLList<X>&) {
+  // Pendiente
+}
+
+template <class X>
+istream& operator>>(istream&, DLList<X>&) {
+  // Pendiente
+}*/
 
 
 
