@@ -169,12 +169,12 @@ void RecipeInterface::addRecipe() {
     cout << "Receta agregada exitosamente." << endl;
     this->enterToContinue();
 
+    do{
      cout << "¿Desea agregar otra receta? (s/n): ";
         cin >> op;
         op = toupper(op);
         cin.ignore();
 
-        do{
         if(op != 'S' && op != 'N'){
             cout << "Opción inválida." << endl; 
             this->enterToContinue();
