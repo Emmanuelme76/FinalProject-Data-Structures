@@ -4,181 +4,186 @@ using namespace std;
 
 Recipe::Recipe() {}
 
-Recipe::Recipe(const Recipe& r) : name(r.name), ingredientList(r.ingredientList), preparationTime(r.preparationTime), 
-                                  instructions(r.instructions), author(r.author), category(r.category)  {}
+Recipe::Recipe(const Recipe& r)
+    : name(r.name),
+      ingredientList(r.ingredientList),
+      preparationTime(r.preparationTime),
+      instructions(r.instructions),
+      author(r.author),
+      category(r.category) {}
 
 Recipe::~Recipe() {}
 
 string Recipe::getName() const {
-    return this->name;
+  return this->name;
 }
 
 SLList<Ingredient>& Recipe::getListIngredient() {
-    return this->ingredientList;
+  return this->ingredientList;
 }
 
 const SLList<Ingredient>& Recipe::getListIngredient() const {
-    return this->ingredientList;
+  return this->ingredientList;
 }
 
 Time Recipe::getPreparationTime() const {
-    return this->preparationTime;
+  return this->preparationTime;
 }
 
 string Recipe::getInstructions() const {
-    return this->instructions;
+  return this->instructions;
 }
 
 Name Recipe::getAuthor() const {
-    return this->author;
+  return this->author;
 }
 
 std::string Recipe::getCategory() const {
-    return this->category;
+  return this->category;
 }
 
 string Recipe::toString(const bool& showIngredients) const {
-    string result;
+  string result;
 
-    result += "Nombre: " + this->name + "\n";
-    result += "Tiempo de preparación: " + this->preparationTime.toString() + "\n";
-    
-    result += "Instrucciones: " + this->instructions + "\n";
-    result += "Autor: " + this->author.toString() + "\n";
-    result += "Categoría: " + this->category + "\n";   
-    if(showIngredients){
-        result += "\n";
+  result += "Nombre: " + this->name + "\n";
+  result += "Tiempo de preparación: " + this->preparationTime.toString() + "\n";
 
-        result += this->ingredientList.toString();
+  result += "Instrucciones: " + this->instructions + "\n";
+  result += "Autor: " + this->author.toString() + "\n";
+  result += "Categoría: " + this->category + "\n";
+  if (showIngredients) {
+    result += "\n";
 
-        result += "\n\n";
-    }
-    return result;
+    result += this->ingredientList.toString();
+
+    result += "\n\n";
+  }
+  return result;
 }
 
 string Recipe::toStringWithIngredientList(const Recipe) {}
 
 void Recipe::setName(const string& n) {
-    this->name = n;
+  this->name = n;
 }
 
 void Recipe::setIngredientList(const SLList<Ingredient>& l) {
-    this->ingredientList = l;
+  this->ingredientList = l;
 }
 
 void Recipe::setPreparationTime(const Time& p) {
-    this->preparationTime = p;
+  this->preparationTime = p;
 }
 
 void Recipe::setInstructions(const string& i) {
-    this->instructions = i;
+  this->instructions = i;
 }
 
 void Recipe::setAuthor(const Name& a) {
-    this->author = a;
+  this->author = a;
 }
 
 void Recipe::setCategory(const std::string& c) {
-    this->category = c;
+  this->category = c;
 }
 
 Recipe& Recipe::operator=(const Recipe& r) {
-    if(*this == r){
-        return *this;
-    }
-    this->name = r.name;
-    this->ingredientList = r.ingredientList;
-    this->preparationTime = r.preparationTime;
-    this->instructions = r.instructions;
-    this->author = r.author;
-    this->category = r.category;
-    
+  if (*this == r) {
     return *this;
+  }
+  this->name = r.name;
+  this->ingredientList = r.ingredientList;
+  this->preparationTime = r.preparationTime;
+  this->instructions = r.instructions;
+  this->author = r.author;
+  this->category = r.category;
+
+  return *this;
 }
 
 bool Recipe::operator==(const Recipe& r) const {
-    return this->name == r.name;
+  return this->name == r.name;
 }
 
 bool Recipe::operator!=(const Recipe& r) const {
-    return !(*this == r);
+  return !(*this == r);
 }
 
 bool Recipe::operator<(const Recipe& r) const {
-    return this->name < r.name;
+  return this->name < r.name;
 }
 
 bool Recipe::operator<=(const Recipe& r) const {
-    return (*this < r or *this == r);
+  return (*this < r or *this == r);
 }
 
 bool Recipe::operator>(const Recipe& r) const {
-    return !(*this <= r);
+  return !(*this <= r);
 }
 
 bool Recipe::operator>=(const Recipe& r) const {
-    return !(*this < r);
+  return !(*this < r);
 }
 
 int Recipe::compareTo(const Recipe& other) const {
-    return this->name.compare(other.name);
+  return this->name.compare(other.name);
 }
 
 int Recipe::compare(const Recipe& a, const Recipe& b) {
-    return a.name.compare(b.name);
+  return a.name.compare(b.name);
 }
 
 int Recipe::compareByName(const Recipe& a, const Recipe& b) {
-    return a.name.compare(b.name);
+  return a.name.compare(b.name);
 }
 
 int Recipe::compareByPreparationTime(const Recipe& a, const Recipe& b) {
-    return Time::compare(a.preparationTime, b.preparationTime);
+  return Time::compare(a.preparationTime, b.preparationTime);
 }
 
 int Recipe::compareByInstructions(const Recipe& a, const Recipe& b) {
-    return a.instructions.compare(b.instructions);
+  return a.instructions.compare(b.instructions);
 }
 
 int Recipe::compareByAuthor(const Recipe& a, const Recipe& b) {
-    return Name::compare(a.author, b.author);
+  return Name::compare(a.author, b.author);
 }
 
 int Recipe::compareByCategory(const Recipe& a, const Recipe& b) {
-    return a.category.compare(b.category); 
+  return a.category.compare(b.category);
 }
 
 string Recipe::serialize() const {
-    string result;
+  string result;
 
-    result+= this->name + '*';
-    result+= this->preparationTime.serialize() + '*';
-    result+= this->instructions + '*';
-    result+= this->author.serialize() + '*';
-    result+= this->category + '*';
-    result+= this->ingredientList.serialize('@');
+  result += this->name + '*';
+  result += this->preparationTime.serialize() + '*';
+  result += this->instructions + '*';
+  result += this->author.serialize() + '*';
+  result += this->category + '*';
+  result += this->ingredientList.serialize('@');
 
-    return result;
+  return result;
 }
 
 void Recipe::deserialize(const string& str) {
-    stringstream mySStr(str);
-    string myStr;
+  stringstream mySStr(str);
+  string myStr;
 
-    getline(mySStr, this->name, '*');
+  getline(mySStr, this->name, '*');
 
-    getline(mySStr, myStr, '*');
-    this->preparationTime.deserialize(myStr);
+  getline(mySStr, myStr, '*');
+  this->preparationTime.deserialize(myStr);
 
-    getline(mySStr, this->instructions, '*');
-    
-    getline(mySStr, myStr, '*');
-    this->author.deserialize(myStr);
+  getline(mySStr, this->instructions, '*');
 
-    getline(mySStr, this->category, '*');
-    
-    getline(mySStr, myStr);
-    this->ingredientList.deserialize(myStr, '@');
+  getline(mySStr, myStr, '*');
+  this->author.deserialize(myStr);
+
+  getline(mySStr, this->category, '*');
+
+  getline(mySStr, myStr);
+  this->ingredientList.deserialize(myStr, '@');
 }
 /*
 istream& operator >> (istream& is, Recipe& r) {
@@ -197,7 +202,7 @@ istream& operator >> (istream& is, Recipe& r) {
 
 ostream& operator << (ostream& os, const Recipe& r) {
     os << r.name << "\n";
-    os << r.ingredientList; 
+    os << r.ingredientList;
     os << r.preparationTime << "\n";
     os << r.instructions << "\n";
     os << r.author << "\n";

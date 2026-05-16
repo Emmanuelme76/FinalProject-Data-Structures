@@ -1,74 +1,72 @@
 #ifndef __RECIPE_HPP__
 #define __RECIPE_HPP__
 
-#include <string>
 #include <iostream>
 #include <limits>
 #include <sstream>
+#include <string>
 
 #include "ingredient.hpp"
 #include "ingredientinterface.hpp"
 #include "name.hpp"
-#include "time.hpp"
 #include "sllist.hpp"
+#include "time.hpp"
 
-class Recipe{
-private:
-    std::string name;
-    SLList<Ingredient> ingredientList;
-    Time preparationTime;
-    std::string instructions;
-    Name author;
-    std::string category; //Breakfast, Lunch, Dinner, Christmas.
+class Recipe {
+ private:
+  std::string name;
+  SLList<Ingredient> ingredientList;
+  Time preparationTime;
+  std::string instructions;
+  Name author;
+  std::string category;  // Breakfast, Lunch, Dinner, Christmas.
 
-public:
-    Recipe();
-    Recipe(const Recipe&);
+ public:
+  Recipe();
+  Recipe(const Recipe&);
 
-    ~Recipe();
+  ~Recipe();
 
-    std::string getName()const;
-    SLList<Ingredient>& getListIngredient();
-    const SLList<Ingredient>& getListIngredient() const;
-    Time getPreparationTime()const;
-    std::string getInstructions()const;
-    Name getAuthor()const;
-    std::string getCategory()const;
+  std::string getName() const;
+  SLList<Ingredient>& getListIngredient();
+  const SLList<Ingredient>& getListIngredient() const;
+  Time getPreparationTime() const;
+  std::string getInstructions() const;
+  Name getAuthor() const;
+  std::string getCategory() const;
 
-    std::string toString(const bool& showIngredients = false)const;
-    static std::string toStringWithIngredientList(const Recipe);
+  std::string toString(const bool& showIngredients = false) const;
+  static std::string toStringWithIngredientList(const Recipe);
 
-    void setName(const std::string&);
-    void setIngredientList(const SLList<Ingredient>&);
-    void setPreparationTime(const Time&);
-    void setInstructions(const std::string&);
-    void setAuthor(const Name&);
-    void setCategory(const std::string&);
+  void setName(const std::string&);
+  void setIngredientList(const SLList<Ingredient>&);
+  void setPreparationTime(const Time&);
+  void setInstructions(const std::string&);
+  void setAuthor(const Name&);
+  void setCategory(const std::string&);
 
-    Recipe& operator = (const Recipe&);
+  Recipe& operator=(const Recipe&);
 
-    bool operator == (const Recipe&)const;
-    bool operator != (const Recipe&)const;
-    bool operator < (const Recipe&)const;
-    bool operator <= (const Recipe&)const;
-    bool operator > (const Recipe&)const;
-    bool operator >= (const Recipe&)const;
+  bool operator==(const Recipe&) const;
+  bool operator!=(const Recipe&) const;
+  bool operator<(const Recipe&) const;
+  bool operator<=(const Recipe&) const;
+  bool operator>(const Recipe&) const;
+  bool operator>=(const Recipe&) const;
 
-    int compareTo(const Recipe&)const;
-    static int compare(const Recipe&, const Recipe&);
+  int compareTo(const Recipe&) const;
+  static int compare(const Recipe&, const Recipe&);
 
-    static int compareByName(const Recipe&, const Recipe&);
-    static int compareByPreparationTime(const Recipe&, const Recipe&);
-    static int compareByInstructions(const Recipe&, const Recipe&);
-    static int compareByAuthor(const Recipe&, const Recipe&);
-    static int compareByCategory(const Recipe&, const Recipe&);
+  static int compareByName(const Recipe&, const Recipe&);
+  static int compareByPreparationTime(const Recipe&, const Recipe&);
+  static int compareByInstructions(const Recipe&, const Recipe&);
+  static int compareByAuthor(const Recipe&, const Recipe&);
+  static int compareByCategory(const Recipe&, const Recipe&);
 
-    friend std::ostream& operator << (std::ostream&, const Recipe&);
-    friend std::istream& operator >> (std::istream&, Recipe&);
+  friend std::ostream& operator<<(std::ostream&, const Recipe&);
+  friend std::istream& operator>>(std::istream&, Recipe&);
 
-    std::string serialize() const;
-    void deserialize(const std::string&); 
-
-
+  std::string serialize() const;
+  void deserialize(const std::string&);
 };
-#endif // __RECIPE_HPP__
+#endif  // __RECIPE_HPP__

@@ -4,8 +4,8 @@
 #include <exception>
 #include <functional>
 #include <iostream>
-#include <string>
 #include <sstream>
+#include <string>
 
 // Definicion
 
@@ -216,30 +216,27 @@ void SLList<T>::insData(const Position& p, const T& e) {
 
 template <class T>
 void SLList<T>::insertSortedData(const T& e) {
-  Position newNode(new(nothrow) Node(e));
-  
+  Position newNode(new (nothrow) Node(e));
+
   if (newNode == nullptr) {
     throw Exception("Memoria no disponible, insertSortedData");
   }
 
-  if(this->isEmpty() || e < this->anchor->getData()) {
+  if (this->isEmpty() || e < this->anchor->getData()) {
     newNode->setNext(this->anchor);
     this->anchor = newNode;
 
-  }
-  else{
+  } else {
     Position aux(this->anchor);
 
     while (aux->getNext() != nullptr && aux->getNext()->getData() < e) {
-            aux = aux->getNext();
-        }
+      aux = aux->getNext();
+    }
 
-        newNode->setNext(aux->getNext());
-        
-        aux->setNext(newNode);
+    newNode->setNext(aux->getNext());
 
+    aux->setNext(newNode);
   }
-
 }
 
 template <class T>
@@ -370,8 +367,8 @@ std::string SLList<T>::serialize(const char& delim) const {
   std::string result;
   Position aux(this->anchor);
 
-  while(aux != nullptr) {
-    result+= aux->getData().serialize() + delim;
+  while (aux != nullptr) {
+    result += aux->getData().serialize() + delim;
 
     aux = aux->getNext();
   }
@@ -380,24 +377,22 @@ std::string SLList<T>::serialize(const char& delim) const {
 }
 
 template <class T>
-void SLList<T>::deserialize(const std::string& str, const char& delim)  {
+void SLList<T>::deserialize(const std::string& str, const char& delim) {
   std::stringstream mySStr(str);
   std::string myStr;
   T myObj;
 
   this->delAll();
 
-  while(!mySStr.eof()) {
+  while (!mySStr.eof()) {
     getline(mySStr, myStr, delim);
 
-    if(!myStr.empty()) {
+    if (!myStr.empty()) {
       myObj.deserialize(myStr);
 
       this->insData(this->getLastPos(), myObj);
     }
-
   }
-
 }
 /*
 template <class X>
