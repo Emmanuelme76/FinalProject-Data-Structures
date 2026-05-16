@@ -1,50 +1,50 @@
 #ifndef __NAME_HPP__
 #define __NAME_HPP__
 
-#include <string>
+#include <fstream>
 #include <iostream>
+#include <sstream>
+#include <string>
 
-class Name{
-private:
-    std::string last;
-    std::string first;
+class Name {
+ private:
+  std::string last;
+  std::string first;
 
-public:
-    Name();
-    Name(const Name&);
-    Name(const std::string&, const std::string&);
+ public:
+  Name();
+  Name(const Name&);
+  Name(const std::string&, const std::string&);
 
-    ~Name();
+  ~Name();
 
-    std::string getLast() const;
-    std::string getFirst() const;
+  std::string getLast() const;
+  std::string getFirst() const;
 
-    std::string toString() const;
+  std::string toString() const;
 
-    void setLast(const std::string&);
-    void setFirst(const std::string&);
+  void setLast(const std::string&);
+  void setFirst(const std::string&);
 
-    Name& operator =(const Name&);
+  Name& operator=(const Name&);
 
-    bool operator == (const Name&) const;
-    bool operator != (const Name&) const;
-    bool operator < (const Name&) const;
-    bool operator <= (const Name&) const;
-    bool operator > (const Name&) const;
-    bool operator >= (const Name&) const;
+  bool operator==(const Name&) const;
+  bool operator!=(const Name&) const;
+  bool operator<(const Name&) const;
+  bool operator<=(const Name&) const;
+  bool operator>(const Name&) const;
+  bool operator>=(const Name&) const;
 
-    int compareTo(const Name&) const;
-    static int compare(const Name&, const Name&);
-    static int compareByLast(const Name&, const Name&);
-    static int compareByFirst(const Name&, const Name&);
+  int compareTo(const Name&) const;
+  static int compare(const Name&, const Name&);
+  static int compareByLast(const Name&, const Name&);
+  static int compareByFirst(const Name&, const Name&);
 
-    friend std::ostream& operator << (std::ostream&, const Name&);
-    friend std::istream& operator >> (std::istream&, Name&);
+  friend std::ostream& operator<<(std::ostream&, const Name&);
+  friend std::istream& operator>>(std::istream&, Name&);
 
-    std::string serialize() const;
-    void deserialize(const std::string&);
-
-
+  std::string serialize() const;
+  void deserialize(const std::string&);
 };
 
-#endif // __NAME_HPP__
+#endif  // __NAME_HPP__

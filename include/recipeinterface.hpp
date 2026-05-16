@@ -1,45 +1,43 @@
 #ifndef __RECIPEINTERFACE_HPP__
 #define __RECIPEINTERFACE_HPP__
 
-#include <string>
 #include <fstream>
 #include <iostream>
+#include <string>
 
-#include "list.hpp"
+#include "dllist.hpp"
 #include "recipe.hpp"
 
+class RecipeInterface {
+ private:
+  DLList<Recipe>* myListRef;
 
+  void menu();
 
-class RecipeInterface{
-private:
-    List<Recipe>* myListRef;
+  void mainMenu();
 
-    void menu();
-    
-    void mainMenu();
-    
-    void addRecipe();
-    
-    void delRecipe();
+  void addRecipe();
 
-    void delAllRecipes();
-    
-    void editRecipe();
-    
-    void showList();
+  void delRecipe();
 
-    void searchRecipe();
+  void delAllRecipes();
 
-    void sortData();
-    
-    void writeToDisk();
-    
-    void readFromDisk();
-    
-    void enterToContinue();
-    
-    public:
-    RecipeInterface(List<Recipe>&);
+  void editRecipe();
+
+  void showList();
+
+  void searchRecipe();
+
+  void sortData();
+
+  void writeToDisk();
+
+  void readFromDisk();
+
+  void enterToContinue();
+
+ public:
+  RecipeInterface(DLList<Recipe>&);
 };
 
-#endif // __RECIPEINTERFACE_HPP__
+#endif  // __RECIPEINTERFACE_HPP__
