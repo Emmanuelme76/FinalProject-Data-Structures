@@ -174,9 +174,9 @@ template <class T>
 void DLList<T>::Node::setData(const T& e) {
   if (this->dataPtr == nullptr) {
     if ((this->dataPtr = new (nothrow) T(e)) == nullptr)
-      throw Exception("Memoria mo disponible, setData");
+      throw Exception("Memoria no disponible, setData");
   } else {
-    *this->data = e;
+    *this->dataPtr = e;
   }
 }
 
