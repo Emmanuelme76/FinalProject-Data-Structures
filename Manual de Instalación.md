@@ -20,7 +20,6 @@ Ejemplo de como se vería en el escritorio
 cd C:\Users\emman\Desktop\ProyectoFinal\FinalProyect\
 ~~~
 o también puedes escribir en la barra de rutas **PowerShell** para abrir directamente la consola en la ubicación
-![[Pasted image 20260516190441.png]]
 
 4. Lo siguiente que debes hacer es ingresar el siguiente comando:
 
@@ -34,9 +33,6 @@ g++ src/*.cpp -I include -o recetario.exe
 .\recetario.exe
 ~~~
 
-Ejemplo de como se ve todo:
-
-![[Pasted image 20260516190948.png]]
 
 ### Para Linux(Ubuntu/Debian):
 
