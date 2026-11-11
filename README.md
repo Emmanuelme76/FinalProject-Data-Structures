@@ -1,0 +1,1 @@
+Sistema de gestión de recetas e ingredientes desarrollado en C++. Este proyecto demuestra la implementación desde cero de Listas Enlazadas Simples y Dobles, aplicando principios de Programación Orientada a Objetos (Interfaces) y automatización de compilación con Makefiles en un entorno Linux.
